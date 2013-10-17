@@ -3,6 +3,6 @@
 using namespace std;
 using namespace Zeni;
 
-void Frog::render() {
+void Frog::render(Point3f ul, Point3f lr) {
 
 }

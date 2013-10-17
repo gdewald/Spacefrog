@@ -5,7 +5,7 @@ using namespace Zeni;
 using namespace std;
 
 Play_state::Play_state() {
-	//controller = new Controller();
+	controller = new Controller();
 	//view = new Player_view();
 
 	//Map the joystick buttons
@@ -24,6 +24,29 @@ Play_state::Play_state() {
 }
 
 void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence, const int& action) {
+	switch (action) {
+	case 1: //Pause
+		if (confidence == 1.0f) {
+			Game &game = get_Game();
+			game.push_state(new Popup_Menu_State);
+		}
+		break;
+	case 2: //Frog turn
+		controller->leftx(confidence);
+		break;
+	case 3: //Frog move
+		controller->lefty(confidence);
+		break;
+	case 4: //View turn x
+		controller->rightx(confidence);
+		break;
+	case 5: //View turn y
+		controller->righty(confidence);
+		break;
+	case 6: //Frog jump
+		controller->b();
+		break;
+	}
 
 }
 
@@ -56,7 +79,22 @@ void Play_state::on_uncover() {
 }
 
 void Play_state::perform_logic() {
+	SDL_Delay(5);
 
+	const float time_passed = m_chrono.seconds();
+	float time_step = time_passed - m_time_passed;
+	m_time_passed = time_passed;
+
+	const float max_timestep = 1.0f / 20.0f;
+	const int max_timesteps = 10;
+	if (time_step / max_timestep > max_timesteps)
+		time_step = max_timesteps * max_timestep;
+
+	while (time_step > max_timestep) {
+		step(max_timestep);
+		time_step -= max_timestep;
+	}
+	step(max_timestep);
 }
 
 void Play_state::step(float m_timestep) {
@@ -64,5 +102,5 @@ void Play_state::step(float m_timestep) {
 }
 
 void Play_state::render() {
-	
+	//view->render();
 }
