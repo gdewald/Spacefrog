@@ -40,29 +40,8 @@ The following things are unsupported:
   5. Anything other than 8 bits per channel
 -->
 <Textures>
-  <!--
-  <one>
-    <is_sprite>0</is_sprite>
-    <filepath>textures/one.png</filepath>
-    <tile>0</tile>
-  </one>
-  <four>
-    <is_sprite>0</is_sprite>
-    <filepath>textures/four.png</filepath>
-    <tile>0</tile>
-  </four>
-  <sprite_token>
-    <is_sprite>1</is_sprite>
-    <token>one</token>
-    <file>
-      <filepath>textures/two.png</filepath>
-      <tile>0</tile>
-    </file>
-    <file>
-      <filepath>textures/three.png</filepath>
-      <tile>0</tile>
-    </file>
-    <token>four</token>
-  </sprite_token>
-  -->
+  <CHECKER.BMP>
+    <filepath>textures/CHECKER.BMP</filepath>
+    <tile>1</tile>
+  </CHECKER.BMP>
 </Textures>
