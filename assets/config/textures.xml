@@ -40,10 +40,6 @@ The following things are unsupported:
   5. Anything other than 8 bits per channel
 -->
 <Textures>
-  <CHECKER.BMP>
-    <filepath>textures/CHECKER.BMP</filepath>
-    <tile>1</tile>
-  </CHECKER.BMP>
    <FROG.BMP>
     <filepath>textures/CHECKER.BMP</filepath>
     <tile>1</tile>
