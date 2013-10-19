@@ -8,9 +8,9 @@ private:
 	Zeni::Point3f position;
 	Zeni::Vector3f direction;
 	float velocity;
-		
+
 public:
 	Frog(Zeni::Point3f position_) : position(position_), direction(Zeni::Vector3f()), Rendered_object("Frog") { }
 
-	void render(Zeni::Point3f ul, Zeni::Point3f lr);
+	void render();
 };

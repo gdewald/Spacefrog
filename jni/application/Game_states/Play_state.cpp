@@ -6,7 +6,7 @@ using namespace std;
 
 Play_state::Play_state() {
 	controller = new Controller();
-	//view = new Player_view();
+	view = new Player_view();
 
 	//Map the joystick buttons
 	//Pause
@@ -98,9 +98,10 @@ void Play_state::perform_logic() {
 }
 
 void Play_state::step(float m_timestep) {
-	//Game_model::get_Model().update(m_timestep);
+	Game_model::get_Model().update(m_timestep);
+	//view->update();
 }
 
 void Play_state::render() {
-	//view->render();
+	view->render();
 }

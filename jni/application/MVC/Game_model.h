@@ -9,23 +9,27 @@
 class Game_model {
 private:
 	std::list<Planet*> planets;
-	//Frog* frog;
+	Frog* frog;
 
 	static Game_model* instance;
-	Game_model() {
-
-	}
+	Game_model();
 public:
+	//Singleton stuff
 	static Game_model& get_Model() {
 		if (!instance) instance = new Game_model();
 		return *instance;
 	}
 
+	//Returns everything that is rendered
 	std::list<Rendered_object*> get_rendered() {
 		std::list<Rendered_object*> renderables;
+		renderables.push_back(frog);
 		for(auto it = planets.begin(); it != planets.end(); it++) {
 			renderables.push_back(*it);
 		}
 		return renderables;
 	}
+
+	//Updates the game model
+	void update(float timestep);
 };

@@ -6,9 +6,12 @@
 class Rendered_object {
 private:
 	Zeni::Model* m;
-	
+	Zeni::Point3f center;
+	Zeni::Vector3f size;
+	Zeni::Quaternion rotation;
 
 public:
 	Rendered_object(Zeni::String model_name);
-	virtual void render(Zeni::Point3f ul, Zeni::Point3f lr) = 0;
+	//Model* get_Model();
+	virtual void render();
 };

@@ -44,4 +44,12 @@ The following things are unsupported:
     <filepath>textures/CHECKER.BMP</filepath>
     <tile>1</tile>
   </CHECKER.BMP>
+   <FROG.BMP>
+    <filepath>textures/CHECKER.BMP</filepath>
+    <tile>1</tile>
+  </FROG.BMP>
+  <PLANET_GREY.BMP>
+    <filepath>textures/CHECKER.BMP</filepath>
+    <tile>1</tile>
+  </PLANET_GREY.BMP>
 </Textures>

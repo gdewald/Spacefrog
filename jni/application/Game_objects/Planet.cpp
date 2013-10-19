@@ -3,7 +3,7 @@
 using namespace Zeni;
 using namespace std;
 
-void Planet::render(Point3f ul, Point3f lr) {
+void Planet::render() {
 	//Game_model m("models/snowball.3ds");
 	//m.set_translate(center);
 	//m.set_scale(scale);
