@@ -10,3 +10,13 @@ void Planet::render() {
 	
 	//m.render();
 }
+
+Vector3f Planet::get_force(Point3f position) {
+	Vector3f f(position - center);
+	if (f.magnitude() > 3 * radius)
+		return Vector3f();
+
+	f.normalize();
+	f *= g;
+	return f;
+}

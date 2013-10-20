@@ -12,6 +12,6 @@ private:
 
 public:
 	Rendered_object(Zeni::String model_name);
-	//Model* get_Model();
+	//Model* get_model();
 	virtual void render();
 };

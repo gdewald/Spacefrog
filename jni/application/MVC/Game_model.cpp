@@ -10,6 +10,10 @@ Game_model::Game_model() {
 	planets.push_back(new Planet(Point3f()));
 }
 
+list<Planet*> Game_model::get_closest_planets(Point3f pos) {
+	return planets;
+}
+
 void Game_model::update(float timestep) {
 	
 }

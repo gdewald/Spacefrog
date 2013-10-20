@@ -3,8 +3,8 @@
 #include <zenilib.h>
 #include <list>
 #include "..\Game_objects\Planet.h"
-#include "..\Game_objects\Frog.h"
 #include "..\Game_objects\Rendered_object.h"
+#include "..\Game_objects\Frog.h"
 
 class Game_model {
 private:
@@ -15,11 +15,11 @@ private:
 	Game_model();
 public:
 	//Singleton stuff
-	static Game_model& get_Model() {
+	static Game_model& get_model() {
 		if (!instance) instance = new Game_model();
 		return *instance;
 	}
-
+	
 	//Returns everything that is rendered
 	std::list<Rendered_object*> get_rendered() {
 		std::list<Rendered_object*> renderables;
@@ -29,6 +29,8 @@ public:
 		}
 		return renderables;
 	}
+
+	std::list<Planet*> get_closest_planets(Zeni::Point3f pos);
 
 	//Updates the game model
 	void update(float timestep);

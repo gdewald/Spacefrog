@@ -44,8 +44,8 @@ The following things are unsupported:
     <filepath>textures/CHECKER.BMP</filepath>
     <tile>1</tile>
   </FROG.BMP>
-  <PLANET_GREY.BMP>
+  <PLANET_GRAY.BMP>
     <filepath>textures/CHECKER.BMP</filepath>
     <tile>1</tile>
-  </PLANET_GREY.BMP>
+  </PLANET_GRAY.BMP>
 </Textures>
