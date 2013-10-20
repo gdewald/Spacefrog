@@ -1,10 +1,13 @@
 #pragma once
 
 #include <zenilib.h>
+#include "../Game_objects/Rendered_object.h"
 
 class Player_view {
 private:
 	//List of rendered objects
+	std::list<Rendered_object*> to_rend;
+	Zeni::Camera* camera;
 
 public:
 

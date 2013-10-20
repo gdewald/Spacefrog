@@ -1,9 +1,12 @@
 #pragma once
 
 #include <zenilib.h>
+#include "../Game_objects/Frog.h"
 
 class Controller {
 private:
+	Frog* frog;
+	Zeni::Camera* camera;
 	
 public:
 	//Turn frog

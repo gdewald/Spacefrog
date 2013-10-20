@@ -10,10 +10,17 @@ class Game_model {
 private:
 	std::list<Planet*> planets;
 	Frog* frog;
+	Zeni::Camera* camera;
 
 	static Game_model* instance;
 	Game_model();
 public:
+	//Initialize new model
+	static void init_model() {
+		if (instance) delete instance;
+		instance = new Game_model();
+	}
+
 	//Singleton stuff
 	static Game_model& get_model() {
 		if (!instance) instance = new Game_model();

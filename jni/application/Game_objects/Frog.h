@@ -12,13 +12,12 @@
 class Frog : public Rendered_object{
 private:
 	Zeni::Point3f position;
-	Zeni::Vector3f direction;
-	float velocity;
-
-	Zeni::Vector3f force;
+	Zeni::Vector3f velocity;
+	Zeni::Quaternion orientation;
 
 public:
-	Frog(Zeni::Point3f position_) : position(position_), direction(Zeni::Vector3f()), Rendered_object("Frog") { }
+	Frog(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_),
+		                                                           velocity(Zeni::Vector3f()), Rendered_object("Frog") { }
 
 	void update(float timestep);
 
