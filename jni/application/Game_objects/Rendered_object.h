@@ -5,13 +5,11 @@
 
 class Rendered_object {
 private:
-	Zeni::Model* m;
-	Zeni::Point3f center;
-	Zeni::Vector3f size;
-	Zeni::Quaternion rotation;
+	Zeni::Model* model;
 
 public:
 	Rendered_object(Zeni::String model_name);
 	//Model* get_model();
 	virtual void render();
+	virtual void render(Zeni::Point3f center, Zeni::Vector3f scale, Zeni::Quaternion rotation);
 };

@@ -9,6 +9,7 @@ void Planet::render() {
 	//m.set_scale(scale);
 	
 	//m.render();
+	Rendered_object::render(center, scale, Quaternion());
 }
 
 Vector3f Planet::get_force(Point3f position) {

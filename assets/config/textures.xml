@@ -40,12 +40,20 @@ The following things are unsupported:
   5. Anything other than 8 bits per channel
 -->
 <Textures>
-   <FROG.BMP>
-    <filepath>textures/CHECKER.BMP</filepath>
+   <CRATE.PNG>
+    <filepath>textures/CHECKER.PNG</filepath>
     <tile>1</tile>
-  </FROG.BMP>
-  <PLANET_GRAY.BMP>
-    <filepath>textures/CHECKER.BMP</filepath>
+  </CRATE.PNG>
+  <PLANET_G.PNG>
+    <filepath>textures/CHECKER.PNG</filepath>
     <tile>1</tile>
-  </PLANET_GRAY.BMP>
+  </PLANET_G.PNG>
+  <SNOW.PNG>
+    <filepath>textures/CHECKER.PNG</filepath>
+    <tile>1</tile>
+  </SNOW.PNG>
+  <FROG.PNG>
+    <filepath>textures/CHECKER.PNG</filepath>
+    <tile>1</tile>
+  </FROG.PNG>
 </Textures>

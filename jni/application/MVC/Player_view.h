@@ -10,6 +10,7 @@ private:
 	Zeni::Camera* camera;
 
 public:
+	Player_view();
 
 	//Renders the rendered_objects that need to be rendered
 	void render();

@@ -6,14 +6,13 @@ using namespace Zeni;
 Game_model* Game_model::instance = nullptr;
 
 Game_model::Game_model() {
-	Point3f init_pos = Point3f();
-	Quaternion init_quaternion = Quaternion();
+	Point3f init_pos = Point3f(100.0f, 100.0f, 100.0f);
+	Quaternion init_quaternion = Quaternion(0.0f, 0.0f, 1.0f);
 	//Create a frog instance
 	frog = new Frog(init_pos, init_quaternion);
 	//Create a camera instance
 	camera = new Camera(init_pos, init_quaternion);
-	planets.push_back(new Planet(Point3f()));
-
+	planets.push_back(new Planet(Point3f(), 50.0f));
 }
 
 list<Planet*> Game_model::get_closest_planets(Point3f pos) {

@@ -7,6 +7,7 @@ using namespace std;
 Play_state::Play_state() {
 	controller = new Controller();
 	view = new Player_view();
+	Game_model::init_model();
 
 	//Map the joystick buttons
 	//Pause
@@ -99,9 +100,19 @@ void Play_state::perform_logic() {
 
 void Play_state::step(float m_timestep) {
 	Game_model::get_model().update(m_timestep);
+	controller->apply_actions(m_timestep);
 	//view->update();
 }
 
 void Play_state::render() {
+	Colors& cr = get_Colors();
 	view->render();
+
+	//Vertex3f_Color v1(Point3f(10.0f, 10.0f, -20.0f), cr["yellow"]);
+	//Vertex3f_Color v2(Point3f(100.0f, 10.0f, -20.0f), cr["yellow"]);
+	//Vertex3f_Color v3(Point3f(100.0f, 100.0f, -20.0f), cr["blue"]);
+	//Vertex3f_Color v4(Point3f(10.0f, 100.0f, -20.0f), cr["blue"]);
+	//Quadrilateral<Vertex3f_Color> q(v1, v2, v3, v4);
+
+	//get_Video().render(q);
 }

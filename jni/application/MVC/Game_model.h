@@ -21,12 +21,15 @@ public:
 		instance = new Game_model();
 	}
 
-	//Singleton stuff
+	//Singleton
 	static Game_model& get_model() {
 		if (!instance) instance = new Game_model();
 		return *instance;
 	}
 	
+	//Getters
+	Zeni::Camera* get_camera() { return camera; }
+
 	//Returns everything that is rendered
 	std::list<Rendered_object*> get_rendered() {
 		std::list<Rendered_object*> renderables;
@@ -38,6 +41,7 @@ public:
 	}
 
 	std::list<Planet*> get_closest_planets(Zeni::Point3f pos);
+	Frog* get_frog() { return frog; }
 
 	//Updates the game model
 	void update(float timestep);
