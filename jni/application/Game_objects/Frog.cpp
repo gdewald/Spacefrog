@@ -46,12 +46,16 @@ void Frog::update(float timestep) {
 
 void Frog::render() {
 	//Model m = Model("models/")
-	Rendered_object::render(position, Vector3f(10, 10, 10), Quaternion());
+	Rendered_object::render(position, Vector3f(.5, .5, .5), orientation);
 }
 
 void Frog::turn(float amount) {
 	if (move_state == LOCK) {
-		orientation = Quaternion::Axis_Angle(orientation.get_rotation().first, orientation.get_rotation().second + amount*0.05);
+		auto axis = orientation.get_rotation().first;
+		auto angle = orientation.get_rotation().second;
+		Vector3f up = orientation * Vector3f(0.0f, -1.0f, 0.0f);
+
+		//orientation *= Quaternion::Axis_Angle(, amount)
 	}
 }
 
@@ -59,4 +63,19 @@ void Frog::move(float amount) {
 	if (move_state == LOCK) {
 		position -= orientation.get_rotation().first.normalized() * amount * 10.0f;
 	}
+}
+
+void Frog::adjust_pitch(float amount) {
+	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
+	orientation = Quaternion::Axis_Angle(left, amount) * orientation;
+}
+
+void Frog::adjust_yaw(float amount) {
+	Vector3f up = orientation * Vector3f(0.0f, 0.0f, 1.0f);
+	orientation = Quaternion::Axis_Angle(up, amount) * orientation;
+}
+
+void Frog::rotate(float amount) {
+	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
+	orientation = Quaternion::Axis_Angle(forward, amount) * orientation;
 }

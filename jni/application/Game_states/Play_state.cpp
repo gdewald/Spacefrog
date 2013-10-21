@@ -5,9 +5,9 @@ using namespace Zeni;
 using namespace std;
 
 Play_state::Play_state() {
+	Game_model::init_model();
 	controller = new Controller();
 	view = new Player_view();
-	Game_model::init_model();
 
 	//Map the joystick buttons
 	//Pause
@@ -21,7 +21,12 @@ Play_state::Play_state() {
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_RIGHTY), 5);
 	//B button
 	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_B), 6);
-
+	//Left bumper
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 7);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 8);
+	//Right bumper
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 9);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 10);
 }
 
 void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence, const int& action) {
@@ -45,7 +50,19 @@ void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence
 		controller->righty(confidence);
 		break;
 	case 6: //Frog jump
-		controller->b();
+		controller->b_down();
+		break;
+	case 7:
+		controller->ls_down();
+		break;
+	case 8:
+		controller->ls_up();
+		break;
+	case 9:
+		controller->rs_down();
+		break;
+	case 10:
+		controller->rs_up();
 		break;
 	}
 

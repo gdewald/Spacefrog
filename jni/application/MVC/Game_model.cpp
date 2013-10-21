@@ -11,8 +11,8 @@ Game_model::Game_model() {
 	//Create a frog instance
 	frog = new Frog(init_pos, init_quaternion);
 	//Create a camera instance
-	camera = new Camera(init_pos, init_quaternion);
-	planets.push_back(new Planet(Point3f(), 50.0f));
+	camera = new Camera(init_pos - init_quaternion.get_rotation().first.normalized()*200, init_quaternion);
+	//planets.push_back(new Planet(Point3f(), 50.0f));
 }
 
 list<Planet*> Game_model::get_closest_planets(Point3f pos) {
@@ -20,5 +20,6 @@ list<Planet*> Game_model::get_closest_planets(Point3f pos) {
 }
 
 void Game_model::update(float timestep) {
-	
+	//frog->rotate(5.0 * timestep);
+	//frog->render();
 }

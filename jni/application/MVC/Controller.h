@@ -10,6 +10,7 @@ private:
 
 	//Controller data
 	bool jump;
+	bool rs, ls;
 	float joy_rx;
 	float joy_ry;
 	float joy_lx;
@@ -29,5 +30,11 @@ public:
 	//Move view up/down
 	void righty(float confidence);
 	//Jump frog
-	void b();
+	void b_down();
+	//Left shoulder
+	void ls_down();
+	void ls_up();
+	//Right shoulder
+	void rs_down();
+	void rs_up();
 };

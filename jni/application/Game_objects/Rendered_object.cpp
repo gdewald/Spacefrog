@@ -22,9 +22,9 @@ Rendered_object::Rendered_object(Zeni::String model_name) {
 	model = model_map[model_name];
 }
 
-void Rendered_object::render() {
-
-}
+//void Rendered_object::render() {
+//
+//}
 
 void Rendered_object::render(Point3f center, Vector3f scale, Quaternion rotation) {
 	model->set_translate(center);

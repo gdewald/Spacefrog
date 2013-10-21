@@ -10,6 +10,6 @@ private:
 public:
 	Rendered_object(Zeni::String model_name);
 	//Model* get_model();
-	virtual void render();
+	virtual void render() = 0;
 	virtual void render(Zeni::Point3f center, Zeni::Vector3f scale, Zeni::Quaternion rotation);
 };
