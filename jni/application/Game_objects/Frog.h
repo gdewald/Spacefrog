@@ -25,7 +25,7 @@ private:
 public:
 	Frog(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_),
 		                                                           velocity(Zeni::Vector3f()), Rendered_object("Frog"),
-																   move_state(LOCK) { }
+																   move_state(JUMP) { }
 
 	//"Bumps" the colliding frog to surface
 	void move_to_lock();

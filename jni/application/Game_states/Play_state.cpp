@@ -12,7 +12,7 @@ Play_state::Play_state() {
 	//Map the joystick buttons
 	//Pause
 	set_action(Zeni_Input_ID(SDL_KEYDOWN, SDLK_ESCAPE), 1);
-	//set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_START), 1);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_START), 1);
 	//Left joystick
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_LEFTX /* x-axis */), 2);
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_LEFTY /* y-axis */), 3);
@@ -123,13 +123,36 @@ void Play_state::step(float m_timestep) {
 
 void Play_state::render() {
 	Colors& cr = get_Colors();
+	Camera* cam = Game_model::get_model().get_camera();
+	Point3f temp = cam->position;
+	cam->position = Point3f();
+
+	get_Video().set_3d(*cam);
+	get_Video().set_zwrite(false);
+
+	Vertex3f_Color v1(Point3f(-50.0f, -50.0f, -50.0f), cr["white"]);
+	Vertex3f_Color v2(Point3f(-50.0f, -50.0f, 50.0f), cr["black"]);
+	Vertex3f_Color v3(Point3f(-50.0f, 50.0f, -50.0f), cr["white"]);
+	Vertex3f_Color v4(Point3f(-50.0f, 50.0f, 50.0f), cr["black"]);
+	Vertex3f_Color v5(Point3f(50.0f, -50.0f, -50.0f), cr["white"]);
+	Vertex3f_Color v6(Point3f(50.0f, -50.0f, 50.0f), cr["black"]);
+	Vertex3f_Color v7(Point3f(50.0f, 50.0f, -50.0f), cr["white"]);
+	Vertex3f_Color v8(Point3f(50.0f, 50.0f, 50.0f), cr["black"]);
+
+	Quadrilateral<Vertex3f_Color> q1(v1, v3, v4, v2);
+	Quadrilateral<Vertex3f_Color> q2(v8, v7, v5, v6);
+	Quadrilateral<Vertex3f_Color> q3(v2, v6, v5, v1);
+	Quadrilateral<Vertex3f_Color> q4(v3, v7, v8, v4);
+	Quadrilateral<Vertex3f_Color> q5(v1, v5, v7, v3);
+	Quadrilateral<Vertex3f_Color> q6(v2, v6, v8, v4);
+
+	get_Video().render(q1);
+	get_Video().render(q2);
+	get_Video().render(q3);
+	get_Video().render(q4);
+	get_Video().render(q5);
+	get_Video().render(q6);
+
+	cam->position = temp;
 	view->render();
-
-	//Vertex3f_Color v1(Point3f(10.0f, 10.0f, -20.0f), cr["yellow"]);
-	//Vertex3f_Color v2(Point3f(100.0f, 10.0f, -20.0f), cr["yellow"]);
-	//Vertex3f_Color v3(Point3f(100.0f, 100.0f, -20.0f), cr["blue"]);
-	//Vertex3f_Color v4(Point3f(10.0f, 100.0f, -20.0f), cr["blue"]);
-	//Quadrilateral<Vertex3f_Color> q(v1, v2, v3, v4);
-
-	//get_Video().render(q);
 }

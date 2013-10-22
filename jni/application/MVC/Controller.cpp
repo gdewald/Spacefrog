@@ -13,17 +13,16 @@ Controller::Controller() : rs(false), ls(false), jump(false) {
 void Controller::apply_actions(float timestep) {
 	//Camera movement
 	if (abs(joy_rx) > 0.2f)
-		camera->adjust_yaw(joy_rx * -0.05f * timestep);
+		camera->adjust_yaw(joy_rx * -0.5f * timestep);
 	if (abs(joy_ry) > 0.2f)
-		camera->adjust_pitch(joy_ry * 0.05f * timestep);
+		camera->adjust_pitch(joy_ry * 0.5f * timestep);
 	//Frog movement
 	if (abs(joy_lx) > 0.2f) {
 		//camera->adjust_yaw(joy_lx * timestep * -0.05);
 		//float theta = timestep*joy_lx;
 		//frog->turn(timestep*joy_lx);
 		//camera->turn_left_xy(timestep*joy_lx);
-		//camera->orientation = frog->get_orientation();
-		frog->adjust_yaw(joy_lx * timestep * 5.0f);
+		frog->adjust_yaw(joy_lx * timestep * -5.0f);
 	}
 	if (abs(joy_ly) > 0.2f) {
 		//camera->position += camera->get_forward().normalized() * timestep * -10 * joy_ly;
@@ -31,12 +30,18 @@ void Controller::apply_actions(float timestep) {
 		//camera->position = frog->get_position() - camera->orientation.get_rotation().first.normalized() * 100.0f;
 		frog->adjust_pitch(joy_ly * timestep * 5.0f);
 	}
-	if (ls) {
-		frog->rotate(0.5f * timestep);
-	}
-	if (rs) {
-		frog->rotate(-0.5f * timestep);
-	}
+	//if (ls) {
+	//	frog->rotate(0.5f * timestep);
+	//	camera->orientation = frog->get_orientation();
+	//}
+	//if (rs) {
+	//	frog->rotate(-0.5f * timestep);
+	//	camera->orientation = frog->get_orientation();
+	//}
+	camera->orientation = frog->get_orientation();
+	Vector3f forward = frog->get_orientation() * Vector3f(1.0f, 0.0f, 0.0f);
+	Vector3f up = frog->get_orientation() * Vector3f(0.0f, 0.0f, 1.0f);
+	camera->position = frog->get_position() - (forward.normalized() * 30.0f) + (up.normalized() * 20.0f);
 }
 
 void Controller::leftx(float confidence) {
