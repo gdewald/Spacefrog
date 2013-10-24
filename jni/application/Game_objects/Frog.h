@@ -29,11 +29,14 @@ public:
 
 	//"Bumps" the colliding frog to surface
 	void move_to_lock();
+	//Makes the view "loop around"
+	void adjust_perspective();
 
 	void update(float timestep);
 
 	void turn(float amount);
 	void move(float amount);
+	void thrust(float amount);
 
 	Zeni::Quaternion get_orientation() { return orientation; }
 	Zeni::Point3f get_position() { return position; }
@@ -41,6 +44,8 @@ public:
 	void adjust_pitch(float amount);
 	void adjust_yaw(float amount);
 	void rotate(float amount);
+
+	void reset_camera(Zeni::Camera* c);
 
 	void render();
 };

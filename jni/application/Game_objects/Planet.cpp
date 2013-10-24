@@ -1,23 +1,26 @@
 #include "Planet.h"
+#include <cmath>
 
 using namespace Zeni;
 using namespace std;
 
 void Planet::render() {
-	//Game_model m("models/snowball.3ds");
-	//m.set_translate(center);
-	//m.set_scale(scale);
-	
-	//m.render();
 	Rendered_object::render(center, scale, Quaternion());
+
+	Colors& cr = get_Colors();
+	Vertex3f_Color v1(center - Point3f(radius, 0, 0), cr["yellow"]);
+	Vertex3f_Color v2(center + Point3f(radius, 0, 0), cr["green"]);
+	Line_Segment<Vertex3f_Color> l(v1, v2);
+	get_Video().render(l);
 }
 
 Vector3f Planet::get_force(Point3f position) {
-	Vector3f f(position - center);
+	Vector3f f(center - position);
 	if (f.magnitude() > 3 * radius)
 		return Vector3f();
 
 	f.normalize();
-	f *= g;
+	float rad2 = f.magnitude2();
+	f = f.normalized()*(g/rad2);
 	return f;
 }

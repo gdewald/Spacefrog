@@ -5,43 +5,64 @@
 using namespace std;
 using namespace Zeni;
 
-Controller::Controller() : rs(false), ls(false), jump(false) {
+Controller::Controller() : rs(false), ls(false), b_hold(false), b_release(false), jump(false) {
 	camera = Game_model::get_model().get_camera();
 	frog = Game_model::get_model().get_frog();
 }
 
 void Controller::apply_actions(float timestep) {
+	bool match_cam = false;
 	//Camera movement
-	if (abs(joy_rx) > 0.2f)
+	if (abs(joy_rx) > 0.1f) {
 		camera->adjust_yaw(joy_rx * -0.5f * timestep);
-	if (abs(joy_ry) > 0.2f)
+	}
+	if (abs(joy_ry) > 0.1f) {
 		camera->adjust_pitch(joy_ry * 0.5f * timestep);
+	}
 	//Frog movement
-	if (abs(joy_lx) > 0.2f) {
+	if (abs(joy_lx) > 0.1f) {
 		//camera->adjust_yaw(joy_lx * timestep * -0.05);
 		//float theta = timestep*joy_lx;
 		//frog->turn(timestep*joy_lx);
 		//camera->turn_left_xy(timestep*joy_lx);
-		frog->adjust_yaw(joy_lx * timestep * -5.0f);
+		frog->turn(joy_lx * timestep * -5.0f);
+		match_cam = true;
 	}
-	if (abs(joy_ly) > 0.2f) {
+	if (abs(joy_ly) > 0.1f) {
 		//camera->position += camera->get_forward().normalized() * timestep * -10 * joy_ly;
 		//frog->move(timestep * joy_ly);
 		//camera->position = frog->get_position() - camera->orientation.get_rotation().first.normalized() * 100.0f;
-		frog->adjust_pitch(joy_ly * timestep * 5.0f);
+		frog->move(joy_ly * timestep * 5.0f);
+		match_cam = true;
 	}
-	//if (ls) {
-	//	frog->rotate(0.5f * timestep);
-	//	camera->orientation = frog->get_orientation();
-	//}
-	//if (rs) {
-	//	frog->rotate(-0.5f * timestep);
-	//	camera->orientation = frog->get_orientation();
-	//}
-	camera->orientation = frog->get_orientation();
-	Vector3f forward = frog->get_orientation() * Vector3f(1.0f, 0.0f, 0.0f);
-	Vector3f up = frog->get_orientation() * Vector3f(0.0f, 0.0f, 1.0f);
-	camera->position = frog->get_position() - (forward.normalized() * 30.0f) + (up.normalized() * 20.0f);
+	if (b_hold) {
+		const float MAX_TIME = 3.0f;
+		b_time += timestep;
+		if (b_time > MAX_TIME)
+			b_time = MAX_TIME;
+	}
+	if (b_release) {
+		b_time = 0.0f;
+		b_release = false;
+		//frog->jump(b_time);
+	}
+	if (ls) {
+		frog->rotate(0.5f * timestep);
+		camera->orientation = frog->get_orientation();
+		match_cam = true;
+	}
+	if (rs) {
+		frog->rotate(-0.5f * timestep);
+		camera->orientation = frog->get_orientation();
+		match_cam = true;
+	}
+	if (joy_rt > 0.05) {
+		frog->thrust(joy_rt * timestep * 100.0f);
+		match_cam = true;
+	}
+	if (match_cam) {
+		frog->reset_camera(camera);
+	}
 }
 
 void Controller::leftx(float confidence) {
@@ -60,24 +81,24 @@ void Controller::righty(float confidence) {
 	joy_ry = confidence;
 }
 
-void Controller::b_down() {
-	//jump = true;
+void Controller::b_state(float confidence) {
+	if (confidence > 0) b_hold = true;
+	else if (b_hold) {
+		b_hold = false;
+		b_release = true;
+	}
 }
 
 //Left shoulder
-void Controller::ls_down() {
-	ls = true;
-}
-
-void Controller::ls_up() {
-	ls = false;
+void Controller::ls_state(float confidence) {
+	ls = (confidence > 0);
 }
 
 //Right shoulder
-void Controller::rs_down() {
-	rs = true;
+void Controller::rs_state(float confidence) {
+	rs = (confidence > 0);
 }
 
-void Controller::rs_up() {
-	rs = false;
+void Controller::rt(float confidence) {
+	joy_rt = confidence;
 }

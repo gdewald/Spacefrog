@@ -20,13 +20,16 @@ Play_state::Play_state() {
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_RIGHTX), 4);
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_RIGHTY), 5);
 	//B button
-	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_B), 6);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_X), 6);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_X), 7);
 	//Left bumper
-	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 7);
-	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 8);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 8);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_LEFTSHOULDER), 9);
 	//Right bumper
-	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 9);
-	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 10);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 10);
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 11);
+	//Right trigger
+	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_TRIGGERRIGHT), 12);
 }
 
 void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence, const int& action) {
@@ -50,20 +53,19 @@ void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence
 		controller->righty(confidence);
 		break;
 	case 6: //Frog jump
-		controller->b_down();
-		break;
 	case 7:
-		controller->ls_down();
+		controller->b_state(confidence);
 		break;
 	case 8:
-		controller->ls_up();
-		break;
 	case 9:
-		controller->rs_down();
+		controller->ls_state(confidence);
 		break;
 	case 10:
-		controller->rs_up();
+	case 11:
+		controller->rs_state(confidence);
 		break;
+	case 12:
+		controller->rt(confidence);
 	}
 
 }
