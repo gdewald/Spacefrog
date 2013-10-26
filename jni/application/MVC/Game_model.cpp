@@ -30,5 +30,9 @@ void Game_model::update(float timestep) {
 	//frog->rotate(5.0 * timestep);
 	//frog->render();
 	frog->update(timestep);
-	time_limit += timestep;
+	timer += timestep / 4;
+
+	//Stop game if over limit
+	if (timer >= time_limit)
+		get_Game().pop_state();
 }
