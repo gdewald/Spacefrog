@@ -12,6 +12,8 @@ private:
 public:
 	Player_view();
 
-	//Renders the rendered_objects that need to be rendered
+	//2D Hud rendering
+	void render_hud();
+	//Renders everything the player sees
 	void render();
 };

@@ -14,6 +14,10 @@ Game_model::Game_model() {
 	Vector3f forward = init_quaternion * Vector3f(1.0f, 0.0f, 0.0f);
 	camera = new Camera(init_pos - (forward.normalized() * 30), init_quaternion);
 
+	//Checkpoint time
+	time_limit = 30;
+	timer = 0.0f;
+
 	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 20.0f));
 	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f));
 }
@@ -26,4 +30,5 @@ void Game_model::update(float timestep) {
 	//frog->rotate(5.0 * timestep);
 	//frog->render();
 	frog->update(timestep);
+	time_limit += timestep;
 }

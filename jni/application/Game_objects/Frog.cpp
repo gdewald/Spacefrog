@@ -100,6 +100,16 @@ void Frog::thrust(float amount)  {
 	velocity += forward.normalized() * amount;
 }
 
+void Frog::jump(float amount) {
+	if (move_state != LOCK)
+		return;
+
+	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
+	orientation = Quaternion::Axis_Angle(left, 3.14f/4.0f) * orientation;
+	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
+	velocity += forward.normalized() * amount * 50.0f;
+}
+
 void Frog::adjust_pitch(float amount) {
 	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
 	orientation = Quaternion::Axis_Angle(left, amount) * orientation;

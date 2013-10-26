@@ -12,6 +12,10 @@ private:
 	Frog* frog;
 	Zeni::Camera* camera;
 
+	//Timer and limit for checkpoints
+	int time_limit;
+	float timer;
+
 	static Game_model* instance;
 	Game_model();
 public:
@@ -29,6 +33,8 @@ public:
 	
 	//Getters
 	Zeni::Camera* get_camera() { return camera; }
+	float get_timer() { return timer; }
+	int get_time_limit() { return time_limit; }
 
 	//Returns everything that is rendered
 	std::list<Rendered_object*> get_rendered() {

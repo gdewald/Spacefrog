@@ -37,6 +37,7 @@ public:
 	void turn(float amount);
 	void move(float amount);
 	void thrust(float amount);
+	void jump(float amount);
 
 	Zeni::Quaternion get_orientation() { return orientation; }
 	Zeni::Point3f get_position() { return position; }
