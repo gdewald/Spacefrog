@@ -132,21 +132,29 @@ void Play_state::render() {
 	get_Video().set_3d(*cam);
 	get_Video().set_zwrite(false);
 
-	Vertex3f_Color v1(Point3f(-50.0f, -50.0f, -50.0f), cr["white"]);
-	Vertex3f_Color v2(Point3f(-50.0f, -50.0f, 50.0f), cr["black"]);
-	Vertex3f_Color v3(Point3f(-50.0f, 50.0f, -50.0f), cr["white"]);
-	Vertex3f_Color v4(Point3f(-50.0f, 50.0f, 50.0f), cr["black"]);
-	Vertex3f_Color v5(Point3f(50.0f, -50.0f, -50.0f), cr["white"]);
-	Vertex3f_Color v6(Point3f(50.0f, -50.0f, 50.0f), cr["black"]);
-	Vertex3f_Color v7(Point3f(50.0f, 50.0f, -50.0f), cr["white"]);
-	Vertex3f_Color v8(Point3f(50.0f, 50.0f, 50.0f), cr["black"]);
+	Material m("skybox");
 
-	Quadrilateral<Vertex3f_Color> q1(v1, v3, v4, v2);
-	Quadrilateral<Vertex3f_Color> q2(v8, v7, v5, v6);
-	Quadrilateral<Vertex3f_Color> q3(v2, v6, v5, v1);
-	Quadrilateral<Vertex3f_Color> q4(v3, v7, v8, v4);
-	Quadrilateral<Vertex3f_Color> q5(v1, v5, v7, v3);
-	Quadrilateral<Vertex3f_Color> q6(v2, v6, v8, v4);
+	Vertex3f_Texture v1(Point3f(-50.0f, -50.0f, -50.0f), Point2f(0.0f, 0.0f));
+	Vertex3f_Texture v2(Point3f(-50.0f, -50.0f, 50.0f), Point2f(1.0f, 0.0f));
+	Vertex3f_Texture v3(Point3f(-50.0f, 50.0f, -50.0f), Point2f(0.0f, 1.0f));
+	Vertex3f_Texture v4(Point3f(-50.0f, 50.0f, 50.0f), Point2f(1.0f, 1.0f));
+	Vertex3f_Texture v5(Point3f(50.0f, -50.0f, -50.0f), Point2f(1.0f, 1.0f));
+	Vertex3f_Texture v6(Point3f(50.0f, -50.0f, 50.0f), Point2f(0.0f, 1.0f));
+	Vertex3f_Texture v7(Point3f(50.0f, 50.0f, -50.0f), Point2f(1.0f, 0.0f));
+	Vertex3f_Texture v8(Point3f(50.0f, 50.0f, 50.0f), Point2f(0.0f, 0.0f));
+
+	Quadrilateral<Vertex3f_Texture> q1(v1, v3, v4, v2);
+	Quadrilateral<Vertex3f_Texture> q2(v8, v7, v5, v6);
+	Quadrilateral<Vertex3f_Texture> q3(v2, v6, v5, v1);
+	Quadrilateral<Vertex3f_Texture> q4(v3, v7, v8, v4);
+	Quadrilateral<Vertex3f_Texture> q5(v1, v5, v7, v3);
+	Quadrilateral<Vertex3f_Texture> q6(v2, v6, v8, v4);
+	q1.fax_Material(&m);
+	q2.fax_Material(&m);
+	q3.fax_Material(&m);
+	q4.fax_Material(&m);
+	q5.fax_Material(&m);
+	q6.fax_Material(&m);
 
 	get_Video().render(q1);
 	get_Video().render(q2);
