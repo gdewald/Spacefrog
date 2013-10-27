@@ -26,10 +26,10 @@ void Frog::adjust_perspective() {
 void Frog::update(float timestep) {
 	switch (move_state) {
 	case LOCK:
-		velocity = Vector3f();
 
 		break;
 	case PREJUMP:
+
 		break;
 	case JUMP:	
 		auto p = Game_model::get_model().get_closest_planets(position);
@@ -43,27 +43,27 @@ void Frog::update(float timestep) {
 		Line_Segment<Vertex3f_Color> l(v1, v2);
 		get_Video().render(l);
 
+		velocity += force * timestep;
+
+		position += velocity * timestep;
+		reset_camera(Game_model::get_model().get_camera());
+
 		for (auto it = p.begin(); it != p.end(); it++) {
-			if ((*it)->get_col_sphere().intersects(Collision::Sphere(pos, 10.0f))) {
+			if ((*it)->get_col_sphere().intersects(Collision::Sphere(position, 10.0f))) {
 				locked_to = *p.begin();
+				velocity = Vector3f();
 				move_to_lock();
 				adjust_perspective();
 				move_state = LOCK;
 				return;
 			}
 		}
-
-		velocity += force * timestep;
-
-		position += velocity * timestep;
-		reset_camera(Game_model::get_model().get_camera());
-
 		break;
 	}
 }
 
 void Frog::render() {
-	Rendered_object::render(position, Vector3f(.5, .5, .5), orientation);
+	Rendered_object::render(position, Vector3f(.3, .3, .3), orientation);
 }
 
 void Frog::turn(float amount) {
@@ -105,9 +105,11 @@ void Frog::jump(float amount) {
 		return;
 
 	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
-	orientation = Quaternion::Axis_Angle(left, 3.14f/4.0f) * orientation;
+	orientation = Quaternion::Axis_Angle(left, -3.14f/8.0f) * orientation;
 	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
-	velocity += forward.normalized() * amount * 50.0f;
+	velocity += forward.normalized() * amount * 500.0f;
+	position += 50.0 * forward.normalized();
+	move_state = JUMP;
 }
 
 void Frog::adjust_pitch(float amount) {
