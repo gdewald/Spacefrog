@@ -11,13 +11,15 @@ Player_view::Player_view() : to_rend() {
 
 void Player_view::render_hud() {
 	Colors& cr = get_Colors();
-	int time_limit = Game_model::get_model().get_time_limit();
-	int time = Game_model::get_model().get_timer();
-
 	float ww = get_Window().get_width();
 	float wh = get_Window().get_height();
+
+	//Time limit data
+	int time_limit = Game_model::get_model().get_time_limit();
+	int time = Game_model::get_model().get_timer();
 	Point2f timer_pos = Point2f(ww / 8, wh / 8);
 
+	//Set up and render HUD
 	get_Video().set_2d();
 	get_Video().set_zwrite(true);
 	get_Fonts()["system_36_800x600"].render_text(itoa(time) + "/" + itoa(time_limit), timer_pos, cr["yellow"]);

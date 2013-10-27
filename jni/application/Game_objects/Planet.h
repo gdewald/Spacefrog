@@ -12,7 +12,7 @@ private:
 	Zeni::Vector3f scale;
 	Zeni::Collision::Sphere col_sphere;
 	float g;
-	float radius;
+	float radius;	
 
 public:
 	Planet(Zeni::Point3f center_, float rad_mult) : center(center_), radius(rad_mult * SPHERE_BASE_RAD),
