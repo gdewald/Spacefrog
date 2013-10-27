@@ -16,7 +16,7 @@ private:
 
 public:
 	Planet(Zeni::Point3f center_, float rad_mult) : center(center_), radius(rad_mult * SPHERE_BASE_RAD),
-		                                            scale(rad_mult, rad_mult, rad_mult), g(20.0), Rendered_object("Planet") {
+		                                            scale(rad_mult, rad_mult, rad_mult), g(100.0), Rendered_object("Planet") {
 		col_sphere = Zeni::Collision::Sphere(center, radius);
 	}
 

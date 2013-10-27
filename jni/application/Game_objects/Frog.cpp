@@ -49,8 +49,8 @@ void Frog::update(float timestep) {
 		reset_camera(Game_model::get_model().get_camera());
 
 		for (auto it = p.begin(); it != p.end(); it++) {
-			if ((*it)->get_col_sphere().intersects(Collision::Sphere(position, 10.0f))) {
-				locked_to = *p.begin();
+			if ((*it)->get_col_sphere().intersects(get_col_sphere())) {
+				locked_to = *it;
 				velocity = Vector3f();
 				move_to_lock();
 				adjust_perspective();

@@ -41,6 +41,7 @@ public:
 
 	Zeni::Quaternion get_orientation() { return orientation; }
 	Zeni::Point3f get_position() { return position; }
+	Zeni::Collision::Sphere get_col_sphere() { return Zeni::Collision::Sphere(position, 10.0f); }
 
 	void adjust_pitch(float amount);
 	void adjust_yaw(float amount);

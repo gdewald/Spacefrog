@@ -16,7 +16,7 @@ void Planet::render() {
 
 Vector3f Planet::get_force(Point3f position) {
 	Vector3f f(center - position);
-	if (f.magnitude() > 3 * radius)
+	if (f.magnitude() > 10 * radius)
 		return Vector3f();
 
 	f.normalize();

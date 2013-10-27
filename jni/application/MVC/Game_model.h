@@ -5,11 +5,14 @@
 #include "..\Game_objects\Planet.h"
 #include "..\Game_objects\Rendered_object.h"
 #include "..\Game_objects\Frog.h"
+#include "..\Game_objects\Food.h"
 
 class Game_model {
 private:
 	std::list<Planet*> planets;
 	Frog* frog;
+	Food* food;
+
 	Zeni::Camera* camera;
 
 	//Timer and limit for checkpoints
@@ -40,6 +43,7 @@ public:
 	std::list<Rendered_object*> get_rendered() {
 		std::list<Rendered_object*> renderables;
 		renderables.push_back(frog);
+		renderables.push_back(food);
 		for(auto it = planets.begin(); it != planets.end(); it++) {
 			renderables.push_back(*it);
 		}
