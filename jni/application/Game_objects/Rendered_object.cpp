@@ -34,3 +34,11 @@ void Rendered_object::render(Point3f center, Vector3f scale, Quaternion rotation
 
 	model->render();
 }
+
+void Rendered_object::advance_keyframe(float timestep, float rate) {
+	float k = model->get_keyframe();
+	float k_max = model->get_keyframes();
+	k += timestep * rate;
+	if (k > k_max) k = k - k_max;
+	model->set_keyframe(k);
+}

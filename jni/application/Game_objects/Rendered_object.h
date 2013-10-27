@@ -12,4 +12,6 @@ public:
 	//Model* get_model();
 	virtual void render() = 0;
 	virtual void render(Zeni::Point3f center, Zeni::Vector3f scale, Zeni::Quaternion rotation);
+
+	virtual void advance_keyframe(float timestep, float rate = 1.0f);
 };

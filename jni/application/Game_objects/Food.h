@@ -26,8 +26,10 @@ public:
 	void set_planet(Planet*, Zeni::Vector3f axis = Zeni::Vector3f(1.0f, 0.0f, 0.0f), float angle = 0.0f);
 
 	Zeni::Point3f get_position() { return position; };
-	Zeni::Quaternion get_orientation() { return orientation; };
+	Zeni::Quaternion get_orientation() { return orientation; }
 	Zeni::Collision::Sphere get_col_sphere() { return col_sphere; }
+
+	void update(float timestep);
 
 	void render();
 };

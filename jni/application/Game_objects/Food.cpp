@@ -12,17 +12,24 @@ void Food::set_planet(Planet* p_, Vector3f axis, float angle) {
 	attached = true;
 	p = p_;
 
-	//Place the food above surface
-	Point3f pos = p->get_position() + axis.normalized() * (p->get_radius() + 5.0f);
-	set_position(pos);
-	//Point it away from planet at and rotate it by the angle
+	axis.normalize();
+	//Set orientation based on axis and angle
 	Quaternion orientation_in = Quaternion::Axis_Angle(axis, angle);
-	//Face the food parallel to the plane
 	Vector3f left = orientation_in * Vector3f(0.0f, 1.0f, 0.0f);
 	orientation_in = Quaternion::Axis_Angle(left, 3.14 / 2) * orientation_in;
 	set_orientation(orientation_in);
+
+	//Place the food above surface
+	Vector3f up = orientation_in * Vector3f(0.0f, 0.0f, 1.0f);
+	Point3f pos = p->get_position() + up.normalized() * (p->get_radius() + 5.0f);
+	set_position(pos);
+
 }
 
 void Food::render() {
 	Rendered_object::render(position, Vector3f(.2, .2, .2), orientation);
+}
+
+void Food::update(float timestep) {
+	Rendered_object::advance_keyframe(timestep, 20.0f);
 }

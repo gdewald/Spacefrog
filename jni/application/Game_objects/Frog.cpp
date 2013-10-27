@@ -26,6 +26,7 @@ void Frog::adjust_perspective() {
 void Frog::update(float timestep) {
 	switch (move_state) {
 	case LOCK:
+		velocity = Vector3f();
 
 		break;
 	case PREJUMP:
@@ -51,9 +52,9 @@ void Frog::update(float timestep) {
 		for (auto it = p.begin(); it != p.end(); it++) {
 			if ((*it)->get_col_sphere().intersects(get_col_sphere())) {
 				locked_to = *it;
-				velocity = Vector3f();
 				move_to_lock();
 				adjust_perspective();
+				reset_camera(Game_model::get_model().get_camera());
 				move_state = LOCK;
 				return;
 			}

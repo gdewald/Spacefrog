@@ -101,8 +101,12 @@ void Play_state::on_uncover() {
 void Play_state::perform_logic() {
 	SDL_Delay(5);
 
+	if (!m_chrono.is_running())
+		return;
+
 	const float time_passed = m_chrono.seconds();
 	float time_step = time_passed - m_time_passed;
+
 	m_time_passed = time_passed;
 
 	const float max_timestep = 1.0f / 20.0f;

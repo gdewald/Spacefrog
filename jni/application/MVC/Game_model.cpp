@@ -1,4 +1,5 @@
 #include "Game_model.h"
+#include <cstdlib>
 
 using namespace std;
 using namespace Zeni;
@@ -30,15 +31,26 @@ list<Planet*> Game_model::get_closest_planets(Point3f pos) {
 	return planets;
 }
 
+void make_random_axis_angle(Vector3f& axis, float& angle) {
+	float theta = 6.28f * ((rand() % 100) / 100.0f);
+	float omega = 6.28f * ((rand() % 100) / 100.0f);
+	axis.set_spherical(theta, omega);
+	angle = 6.28f * ((rand() % 100) / 100.0f);
+}
+
 void Game_model::update(float timestep) {
 	//frog->rotate(5.0 * timestep);
 	//frog->render();
 	frog->update(timestep);
+	food->update(timestep);
 	timer += timestep / 4;
 
 	if (frog->get_col_sphere().intersects(food->get_col_sphere())) {
 		timer = 0.0f;
-		//food->set_planet()
+		Vector3f axis;
+		float angle;
+		make_random_axis_angle(axis, angle);
+		food->set_planet(*planets.begin(), axis, angle);
 	}
 
 	//Stop game if over limit
