@@ -56,4 +56,8 @@ The following things are unsupported:
     <filepath>textures/CHECKER.PNG</filepath>
     <tile>1</tile>
   </FROG.PNG>
+  <DFLY.PNG>
+    <filepath>textures/CHECKER.PNG</filepath>
+    <tile>1</tile>
+  </DFLY.PNG>
 </Textures>

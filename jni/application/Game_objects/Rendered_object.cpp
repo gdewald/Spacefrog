@@ -13,7 +13,7 @@ map<String, Model*> get_model_map() {
 	
 	m["Frog"] = new Model("models/frog.3ds");
 	m["Planet"] = new Model("models/planet.3ds");
-
+	m["Dragonfly"] = new Model("models/dragonfly.3ds");
 	return m;
 }
 
