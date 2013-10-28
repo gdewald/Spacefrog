@@ -53,11 +53,11 @@
         <!--<API>OpenGL</API>-->
         <!--<API>Disabled</API>-->
         <API>OpenGL Fixed</API>
-        <Full_Screen>0</Full_Screen>
-        <Multisampling>16</Multisampling>
+        <Full_Screen>1</Full_Screen>
+        <Multisampling>4</Multisampling>
         <Resolution>
-            <Width>800</Width>
-            <Height>600</Height>
+            <Width>1280</Width>
+            <Height>800</Height>
         </Resolution>
         <Vertical_Sync>1</Vertical_Sync>
     </Video>

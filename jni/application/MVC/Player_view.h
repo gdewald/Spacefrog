@@ -12,7 +12,6 @@ private:
 public:
 	Player_view();
 
-
 	//2D Hud rendering
 	void render_hud();
 	//Renders everything the player sees

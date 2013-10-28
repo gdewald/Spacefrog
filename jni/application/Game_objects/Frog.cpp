@@ -113,7 +113,7 @@ void Frog::turn(float amount) {
 void Frog::move(float amount) {
 	if (move_state == LOCK) {
 		Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
-		position += forward * amount * -5.0f;
+		position += forward * amount * -10.0f;
 		move_to_lock();
 		adjust_perspective();
 	}

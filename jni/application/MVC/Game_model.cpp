@@ -20,8 +20,9 @@ Game_model::Game_model() : controller(nullptr) {
 	time_limit = 30;
 	timer = 0.0f;
 
-	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 20.0f));
-	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f));
+	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 30.0f, 80, "Planet_orange"));
+	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f, 60));
+	planets.push_back(new Planet(Point3f(300.0f, 300.0f, 500.0f), 20.0f));
 
 	//Create a food instance
 	food = new Food(*planets.begin());

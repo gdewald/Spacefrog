@@ -23,7 +23,7 @@ private:
 
 	const float MAX_TURN = 0.05f;
 	const float MAX_MOVE = 5.0f;
-	const float MAX_FUEL = 5.0f;
+	const float MAX_FUEL = 3.5f;
 
 public:
 	Frog(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_),
