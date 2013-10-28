@@ -15,8 +15,8 @@ private:
 	float radius;	
 
 public:
-	Planet(Zeni::Point3f center_, float rad_mult) : center(center_), radius(rad_mult * SPHERE_BASE_RAD),
-		                                            scale(rad_mult, rad_mult, rad_mult), g(100.0), Rendered_object("Planet") {
+	Planet(Zeni::Point3f center_, float rad_mult, Zeni::String p_name="Planet_orange") : center(center_), radius(rad_mult * SPHERE_BASE_RAD),
+		                                            scale(rad_mult, rad_mult, rad_mult), g(100.0), Rendered_object(p_name) {
 		col_sphere = Zeni::Collision::Sphere(center, radius);
 	}
 

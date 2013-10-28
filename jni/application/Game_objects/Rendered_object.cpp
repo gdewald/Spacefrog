@@ -12,8 +12,10 @@ map<String, Model*> get_model_map() {
 	map<String, Model*> m;
 	
 	m["Frog"] = new Model("models/frog.3ds");
-	m["Planet"] = new Model("models/planet.3ds");
+	m["Planet_gray"] = new Model("models/planet_gray.3ds");
 	m["Dragonfly"] = new Model("models/dragonfly.3ds");
+	m["Planet_orange"] = new Model("models/planet_orange.3ds");
+
 	return m;
 }
 

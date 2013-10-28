@@ -48,6 +48,10 @@ The following things are unsupported:
     <filepath>textures/planet_gray.png</filepath>
     <tile>1</tile>
   </PLANET_G.PNG>
+  <PLANET_O.PNG>
+	<filepath>textures/planet_orange.png</filepath>
+    <tile>1</tile>
+  </PLANET_O.PNG>
   <SNOW.PNG>
     <filepath>textures/CHECKER.PNG</filepath>
     <tile>1</tile>
