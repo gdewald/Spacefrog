@@ -35,16 +35,15 @@ void Controller::apply_actions(float timestep) {
 		frog->move(joy_ly * timestep * 5.0f);
 		match_cam = true;
 	}
-	const float MAX_TIME = 3.0f;
 	if (b_hold) {
 		b_time += timestep;
-		if (b_time > MAX_TIME)
-			b_time = MAX_TIME;
+		if (b_time > MAX_B_TIME)
+			b_time = MAX_B_TIME;
 	}
 	if (b_release) {
 		b_time = 0.0f;
 		b_release = false;
-		frog->jump(b_time/MAX_TIME);
+		frog->jump(b_time/MAX_B_TIME);
 	}
 	if (ls) {
 		frog->rotate(0.5f * timestep);

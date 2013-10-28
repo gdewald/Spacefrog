@@ -57,7 +57,11 @@ void Frog::update(float timestep) {
 		move_state = JUMP;
 
 		break;
-	case JUMP:	
+	case JUMP:
+		fuel += timestep * 0.1;
+		if (fuel > MAX_FUEL)
+			fuel = MAX_FUEL;
+
 		auto p = Game_model::get_model().get_closest_planets(position);
 		Vector3f force = Vector3f();
 		Point3f pos = position;

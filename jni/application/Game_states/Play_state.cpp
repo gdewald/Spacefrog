@@ -6,7 +6,7 @@ using namespace std;
 
 Play_state::Play_state() {
 	Game_model::init_model();
-	controller = new Controller();
+	controller = Game_model::get_model().get_controller();//Game_model::get_model().get_controller();
 	view = new Player_view();
 
 	//Map the joystick buttons

@@ -7,8 +7,13 @@
 #include "..\Game_objects\Frog.h"
 #include "..\Game_objects\Food.h"
 
+class Controller;
+
 class Game_model {
 private:
+	//MVC stuff
+	Controller* controller;
+
 	std::vector<Planet*> planets;
 	Frog* frog;
 	Food* food;
@@ -36,6 +41,7 @@ public:
 	
 	//Getters
 	Zeni::Camera* get_camera() { return camera; }
+	Controller* get_controller();
 	float get_timer() { return timer; }
 	int get_time_limit() { return time_limit; }
 

@@ -20,9 +20,13 @@ private:
 	float joy_lx;
 	float joy_ly;
 	float joy_rt;
+
+	const float MAX_B_TIME = 3.0f;
 	
 public:
 	Controller();
+
+	float get_b_percent() { return b_time / MAX_B_TIME; }
 
 	void apply_actions(float timestep);
 

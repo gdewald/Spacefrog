@@ -1,5 +1,6 @@
 #include "Player_view.h"
 #include "Game_model.h"
+#include "Controller.h"
 
 using namespace std;
 using namespace Zeni;
@@ -28,12 +29,21 @@ void Player_view::render_hud() {
 	Vertex2f_Color v4(Point2f(ww / 2 - bar_w / 2, wh -  wh / 16 + 30.0f), cr["red"]);
 	Quadrilateral<Vertex2f_Color> fuel_bar(v1, v2, v3, v4);
 
+	//Jump data
+	bar_w = Game_model::get_model().get_controller()->get_b_percent() * ww/2;
+	Vertex2f_Color v1_j(Point2f(ww / 2 - bar_w / 2, wh / 16), cr["blue"]);
+	Vertex2f_Color v2_j(Point2f(ww / 2 + bar_w / 2, wh / 16), cr["white"]);
+	Vertex2f_Color v3_j(Point2f(ww / 2 + bar_w / 2, wh / 16 + 30.0f), cr["white"]);
+	Vertex2f_Color v4_j(Point2f(ww / 2 - bar_w / 2, wh / 16 + 30.0f), cr["blue"]);
+	Quadrilateral<Vertex2f_Color> jump_bar(v1_j, v2_j, v3_j, v4_j);
+
 	//Set up and render HUD
 	get_Video().set_2d();
 	get_Video().set_zwrite(true);
 	//Render timer
 	get_Fonts()["system_36_800x600"].render_text(itoa(time) + "/" + itoa(time_limit), timer_pos, cr["yellow"]);
 	get_Video().render(fuel_bar);
+	get_Video().render(jump_bar);
 }
 
 void Player_view::render() {
