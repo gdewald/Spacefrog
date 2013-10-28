@@ -4,6 +4,24 @@
 using namespace std;
 using namespace Zeni;
 
+Frog::Frog(Planet* p, Zeni::Vector3f axis, float angle) : Rendered_object("Frog") {
+	move_state = LOCK;
+	locked_to = p;
+
+	axis.normalize();
+	//Set orientation based on axis and angle
+	orientation = Quaternion::Axis_Angle(axis, angle);
+	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
+	orientation = Quaternion::Axis_Angle(left, 3.14 / 2) * orientation;
+
+	//Place the food above surface
+	Vector3f up = orientation * Vector3f(0.0f, 0.0f, 1.0f);
+	position = p->get_position() + up.normalized() * (p->get_radius());
+
+	//Set fuel
+	fuel = MAX_FUEL;
+}
+
 void Frog::move_to_lock() {
 	Vector3f center_to_point = position - locked_to->get_position();
 
@@ -28,15 +46,22 @@ void Frog::update(float timestep) {
 	case LOCK:
 		velocity = Vector3f();
 
+		fuel += timestep;
+		if (fuel > MAX_FUEL)
+			fuel = MAX_FUEL;
+
 		break;
 	case PREJUMP:
+		position += velocity * timestep;
+		reset_camera(Game_model::get_model().get_camera());
+		move_state = JUMP;
 
 		break;
 	case JUMP:	
 		auto p = Game_model::get_model().get_closest_planets(position);
 		Vector3f force = Vector3f();
 		Point3f pos = position;
-		for_each(p.begin(), p.end(), [&force, &pos](Planet* p){ force += p->get_force(pos); });
+		for_each(p.begin(), p.end(), [&force, &pos, &timestep](Planet* p){ force += p->get_force(pos); });
 
 		Colors& cr = get_Colors();
 		Vertex3f_Color v1(pos - Point3f(10.0f, 0, 0), cr["yellow"]);
@@ -97,8 +122,23 @@ void Frog::thrust(float amount)  {
 	if (move_state == LOCK)
 		return;
 
+	amount = amount * 0.01;
+
+	//Check for any fuel
+	if (fuel <= 0) {
+		fuel = 0;
+		return;
+	}
+
+	//Use correct amount of fuel
+	if (amount > fuel) {
+		amount = fuel;
+		fuel = 0;
+	}
+	else fuel -= amount;
+
 	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
-	velocity += forward.normalized() * amount;
+	velocity += forward.normalized() * amount * 100;
 }
 
 void Frog::jump(float amount) {
@@ -110,7 +150,7 @@ void Frog::jump(float amount) {
 	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
 	velocity += forward.normalized() * amount * 500.0f;
 	position += 50.0 * forward.normalized();
-	move_state = JUMP;
+	move_state = PREJUMP;
 }
 
 void Frog::adjust_pitch(float amount) {

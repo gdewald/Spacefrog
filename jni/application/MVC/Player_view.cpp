@@ -19,10 +19,21 @@ void Player_view::render_hud() {
 	int time = Game_model::get_model().get_timer();
 	Point2f timer_pos = Point2f(ww / 8, wh / 8);
 
+	//Fuel data
+	float bar_w = Game_model::get_model().get_frog()->get_fuel_percent() * ww/2;
+	float bar_h = wh / 16;
+	Vertex2f_Color v1(Point2f(ww / 2 - bar_w / 2, wh - wh / 16), cr["red"]);
+	Vertex2f_Color v2(Point2f(ww / 2 + bar_w / 2, wh - wh / 16), cr["green"]);
+	Vertex2f_Color v3(Point2f(ww / 2 + bar_w / 2, wh - wh / 16 + 30.0f), cr["green"]);
+	Vertex2f_Color v4(Point2f(ww / 2 - bar_w / 2, wh -  wh / 16 + 30.0f), cr["red"]);
+	Quadrilateral<Vertex2f_Color> fuel_bar(v1, v2, v3, v4);
+
 	//Set up and render HUD
 	get_Video().set_2d();
 	get_Video().set_zwrite(true);
+	//Render timer
 	get_Fonts()["system_36_800x600"].render_text(itoa(time) + "/" + itoa(time_limit), timer_pos, cr["yellow"]);
+	get_Video().render(fuel_bar);
 }
 
 void Player_view::render() {

@@ -1,5 +1,6 @@
 #include "Game_model.h"
 #include <cstdlib>
+#include <ctime>
 
 using namespace std;
 using namespace Zeni;
@@ -7,13 +8,11 @@ using namespace Zeni;
 Game_model* Game_model::instance = nullptr;
 
 Game_model::Game_model() {
-	Point3f init_pos = Point3f(100.0f, 100.0f, 100.0f);
-	Quaternion init_quaternion = Quaternion(0.0f, 0.0f, 1.0f);
-	//Create a frog instance
-	frog = new Frog(init_pos, init_quaternion);
-	//Create a camera instance
-	Vector3f forward = init_quaternion * Vector3f(1.0f, 0.0f, 0.0f);
-	camera = new Camera(init_pos - (forward.normalized() * 30), init_quaternion);
+	//Point3f init_pos = Point3f(100.0f, 100.0f, 100.0f);
+	//Quaternion init_quaternion = Quaternion(0.0f, 0.0f, 1.0f);
+	////Create a camera instance
+	//Vector3f forward = init_quaternion * Vector3f(1.0f, 0.0f, 0.0f);
+	//camera = new Camera(init_pos - (forward.normalized() * 30), init_quaternion);
 
 
 	//Checkpoint time
@@ -25,13 +24,19 @@ Game_model::Game_model() {
 	
 	//Create a food instance
 	food = new Food(*planets.begin());
+	//Create a frog instance
+	frog = new Frog(planets[1]);
+	//Set up camera instance
+	camera = new Camera(frog->get_position(), frog->get_orientation());
+	frog->reset_camera(camera);
 }
 
-list<Planet*> Game_model::get_closest_planets(Point3f pos) {
+vector<Planet*> Game_model::get_closest_planets(Point3f pos) {
 	return planets;
 }
 
 void make_random_axis_angle(Vector3f& axis, float& angle) {
+	srand(time(NULL));
 	float theta = 6.28f * ((rand() % 100) / 100.0f);
 	float omega = 6.28f * ((rand() % 100) / 100.0f);
 	axis.set_spherical(theta, omega);
@@ -50,7 +55,8 @@ void Game_model::update(float timestep) {
 		Vector3f axis;
 		float angle;
 		make_random_axis_angle(axis, angle);
-		food->set_planet(*planets.begin(), axis, angle);
+		int i = rand() % planets.size();
+		food->set_planet(planets[i], axis, angle);
 	}
 
 	//Stop game if over limit

@@ -1,7 +1,7 @@
 #pragma once
 
 #include <zenilib.h>
-#include <list>
+#include <vector>
 #include "..\Game_objects\Planet.h"
 #include "..\Game_objects\Rendered_object.h"
 #include "..\Game_objects\Frog.h"
@@ -9,7 +9,7 @@
 
 class Game_model {
 private:
-	std::list<Planet*> planets;
+	std::vector<Planet*> planets;
 	Frog* frog;
 	Food* food;
 
@@ -50,7 +50,7 @@ public:
 		return renderables;
 	}
 
-	std::list<Planet*> get_closest_planets(Zeni::Point3f pos);
+	std::vector<Planet*> get_closest_planets(Zeni::Point3f pos);
 	Frog* get_frog() { return frog; }
 
 	//Updates the game model
