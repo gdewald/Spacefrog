@@ -53,7 +53,7 @@ The following things are unsupported:
     <tile>1</tile>
   </SNOW.PNG>
   <FROG.PNG>
-    <filepath>textures/CHECKER.PNG</filepath>
+    <filepath>textures/frog.png</filepath>
     <tile>1</tile>
   </FROG.PNG>
   <DFLY.PNG>
