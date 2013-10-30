@@ -2,6 +2,8 @@
 #include "Game_model.h"
 #include "Controller.h"
 
+//#define DEBUG_ROT
+
 using namespace std;
 using namespace Zeni;
 
@@ -17,8 +19,8 @@ void Player_view::render_hud() {
 
 	//Time limit data
 	int time_limit = Game_model::get_model().get_time_limit();
-	int time = Game_model::get_model().get_timer();
-	Point2f timer_pos = Point2f(ww / 8, wh / 8);
+	float time = Game_model::get_model().get_timer();
+	Point2f timer_pos = Point2f(ww / 2 - 30.0f, wh / 8);
 
 	//Fuel data
 	float bar_w = Game_model::get_model().get_frog()->get_fuel_percent() * ww/2;
@@ -41,20 +43,29 @@ void Player_view::render_hud() {
 	get_Video().set_2d();
 	get_Video().clear_depth_buffer();
 	//Render timer
-	get_Fonts()["system_36_800x600"].render_text(itoa(time) + "/" + itoa(time_limit), timer_pos, cr["yellow"]);
+	if (time > 10.0f)
+		get_Fonts()["timer"].render_text(itoa(time), Vector3f(timer_pos), Vector3f(1.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 0.0f), cr["white"]);
+	else if (time > 5.0f)
+		get_Fonts()["timer"].render_text(itoa(time), Vector3f(timer_pos), Vector3f(1.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 0.0f), cr["yellow"]);
+	else get_Fonts()["timer"].render_text(ftoa(time, 3), Vector3f(timer_pos), Vector3f(1.0f, 0.0f, 0.0f), Vector3f(0.0f, 1.0f, 0.0f), cr["red"]);
+
 	get_Video().render(fuel_bar);
 	//get_Video().render(jump_bar);
 
+#ifdef DEBUG_ROT
 	//Debugging
 	Camera* c = Game_model::get_model().get_camera();
-	get_Fonts()["system_36_800x600"].render_text("(" + ftoa(c->position.x) + "," + ftoa(c->position.y) + "," + ftoa(c->position.z) + ")", 
+	get_Fonts()["system_36_800x600"].render_text("(" + ftoa(c->position.x, 3) + "," + ftoa(c->position.y, 3) + "," + ftoa(c->position.z, 3) + ")", 
 		                                         timer_pos + Vector2f(0.0f, 30.0f), cr["yellow"]);
-	Vector3f axis = c->orientation.normalized().get_rotation().first;
-	float angle = c->orientation.normalized().get_rotation().second;
-	get_Fonts()["system_36_800x600"].render_text("(" + ftoa(axis.x) + "," + ftoa(axis.y) + "," + ftoa(axis.z) + "," + ftoa(angle) + ")",
+	Vector3f axis = c->orientation.get_rotation().first;
+	float angle = c->orientation.get_rotation().second;
+	get_Fonts()["system_36_800x600"].render_text("(" + ftoa(axis.x, 4) + "," + ftoa(axis.y, 4) + "," + ftoa(axis.z, 4) + "," + ftoa(angle, 4) + ")",
 		timer_pos + Vector2f(0.0f, 60.0f), cr["yellow"]);
+#endif
+#ifdef DEBUG_ANIM
 	get_Fonts()["system_36_800x600"].render_text("(" + ftoa(Game_model::get_model().get_frog()->keyframe_step) + ")",
 		timer_pos + Vector2f(0.0f, 90.0f), cr["yellow"]);
+#endif
 }
 
 void Player_view::render() {

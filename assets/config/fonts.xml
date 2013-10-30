@@ -18,6 +18,13 @@ For each entry in Fonts:
 Only TrueType fonts are supported.
 -->
 <Fonts>
+  <timer>
+    <filepath>fonts/airborne.ttf</filepath>
+    <height>48</height>
+    <virtual_screen>
+      <height>600</height>
+    </virtual_screen>
+  </timer>
   <system_36_x600>
     <filepath>fonts/airborne.ttf</filepath>
     <height>26</height>

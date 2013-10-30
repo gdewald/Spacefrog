@@ -32,4 +32,5 @@ void Food::render() {
 
 void Food::update(float timestep) {
 	Rendered_object::advance_keyframe(timestep, 20.0f);
+	//Flutter sound
 }

@@ -74,6 +74,9 @@ void Frog::update(float timestep) {
 
 		break;
 	case PREJUMP:
+
+		//Jump sound
+
 		//position += velocity * timestep;
 		//reset_camera(Game_model::get_model().get_camera());
 		move_state = JUMP;
@@ -116,6 +119,9 @@ void Frog::update(float timestep) {
 				move_to_lock();
 				adjust_perspective();
 				reset_camera_pos(Game_model::get_model().get_camera());
+
+				//Landing sound
+
 				move_state = PRELOCK;
 				return;
 			}
@@ -145,8 +151,10 @@ pair<Vector3f, float> Frog::turn(float amount) {
 pair<Vector3f, float> Frog::move(float amount) {
 	if (move_state == LOCK) {
 		//Start/continue jumping animation
-		if (keyframe_step >= 1.0f)
+		if (keyframe_step >= 1.0f) {
 			keyframe_step = 0.0f;
+			//Ribbit sound
+		}
 
 		Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
 		position += forward * amount * -10.0f;
@@ -215,7 +223,7 @@ void Frog::rotate(float amount) {
 }
 
 void Frog::reset_camera(Zeni::Camera* c) {
-	c->orientation = orientation;
+	c->orientation = orientation.normalized();
 	reset_camera_pos(c);
 }
 

@@ -16,8 +16,8 @@ Game_model::Game_model() : controller(nullptr) {
 	//camera = new Camera(init_pos - (forward.normalized() * 30), init_quaternion);
 
 	//Checkpoint time
-	time_limit = 30;
-	timer = 0.0f;
+	time_limit = 25;
+	timer = 30.0f;
 
 	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 25.0f, 80, "Planet_orange"));
 	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f, 60));
@@ -54,18 +54,26 @@ void Game_model::update(float timestep) {
 	//frog->render();
 	frog->update(timestep);
 	food->update(timestep);
-	timer += timestep / 4;
+
+	//Reduce timer
+	timer -= timestep / 4;
 
 	if (frog->get_col_sphere().intersects(food->get_col_sphere())) {
-		timer = 0.0f;
+		// Add the time limit if food picked up
+		timer += time_limit;
+		if (time_limit > 5)
+			time_limit -= 5;
+
 		Vector3f axis;
 		float angle;
 		make_random_axis_angle(axis, angle);
 		int i = rand() % planets.size();
 		food->set_planet(planets[i], axis, angle);
+
+		//Food sound
 	}
 
-	//Stop game if over limit
-	//if (timer >= time_limit)
-		//get_Game().pop_state();
+	//Stop game if out of time
+	if (timer <= 0.0f)
+		get_Game().pop_state();
 }
