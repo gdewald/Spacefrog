@@ -29,7 +29,6 @@ Game_model::Game_model() : controller(nullptr) {
 	frog = new Frog(planets[1]);
 	//Set up camera instance
 	camera = new Camera(frog->get_position(), frog->get_orientation(), 10.0f, 2000.0f);
-	frog->reset_camera(camera);
 }
 
 Controller* Game_model::get_controller() {
@@ -50,6 +49,8 @@ void make_random_axis_angle(Vector3f& axis, float& angle) {
 }
 
 void Game_model::update(float timestep) {
+	//frog->reset_camera(camera);
+	//frog->reset_camera_pos(camera);
 	//frog->rotate(5.0 * timestep);
 	//frog->render();
 	frog->update(timestep);

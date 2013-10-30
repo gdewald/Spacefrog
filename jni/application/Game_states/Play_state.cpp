@@ -122,9 +122,8 @@ void Play_state::perform_logic() {
 }
 
 void Play_state::step(float m_timestep) {
-	Game_model::get_model().update(m_timestep);
 	controller->apply_actions(m_timestep);
-	//view->update();
+	Game_model::get_model().update(m_timestep);
 }
 
 void Play_state::render() {

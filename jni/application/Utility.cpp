@@ -26,6 +26,7 @@ Quaternion quaternion_slerp(Quaternion src, Quaternion dest, float t) {
 	if (t <= 0.0f) return src;
 	else if (t >= 1.0f) return dest;
 
+
 	if (abs((inverse(src) * dest).get_rotation().second) < 0.05f) return quaternion_lerp(src, dest, t);
 
 	//omega = theta/2
@@ -35,6 +36,7 @@ Quaternion quaternion_slerp(Quaternion src, Quaternion dest, float t) {
 		cos_omega = -cos_omega;
 		dest = -dest;
 	}
+	return quaternion_lerp(src, dest, t);
 
 	float omega = acosf(cos_omega);
 	//if (omega < 0.01 && omega > -0.01) return src;

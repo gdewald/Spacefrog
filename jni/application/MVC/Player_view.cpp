@@ -2,7 +2,7 @@
 #include "Game_model.h"
 #include "Controller.h"
 
-//#define DEBUG_ROT
+#define DEBUG_ROT
 
 using namespace std;
 using namespace Zeni;

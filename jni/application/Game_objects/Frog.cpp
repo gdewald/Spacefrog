@@ -84,7 +84,6 @@ void Frog::update(float timestep) {
 		Rendered_object::swap_model("Frog_jump");
 		Rendered_object::reset_keyframe();
 		keyframe_step = 0.0f;
-
 	case JUMP:
 		//Regenerate fuel
 		fuel += timestep * 0.1;
@@ -149,7 +148,7 @@ pair<Vector3f, float> Frog::turn(float amount) {
 }
 
 pair<Vector3f, float> Frog::move(float amount) {
-	if (move_state == LOCK) {
+	if (move_state == LOCK || move_state == PRELOCK) {
 		//Start/continue jumping animation
 		if (keyframe_step >= 1.0f) {
 			keyframe_step = 0.0f;

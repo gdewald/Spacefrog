@@ -3,6 +3,8 @@
 #include <zenilib.h>
 #include "../Game_objects/Frog.h"
 
+const float MAX_B_TIME = 3.0f;
+
 class Controller {
 private:
 	Frog* frog;
@@ -21,7 +23,6 @@ private:
 	float joy_ly;
 	float joy_rt;
 
-	const float MAX_B_TIME = 3.0f;
 	
 public:
 	Controller();

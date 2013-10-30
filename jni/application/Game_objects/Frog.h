@@ -11,6 +11,10 @@
 // in the air - JUMP
 enum MOVEMENT_STATE {LOCK, PRELOCK, PREJUMP, JUMP};
 
+const float MAX_TURN = 0.05f;
+const float MAX_MOVE = 5.0f;
+const float MAX_FUEL = 3.5f;
+
 class Frog : public Rendered_object{
 private:
 	Zeni::Point3f position;
@@ -21,10 +25,6 @@ private:
 	Planet* locked_to;
 
 	float fuel;
-
-	const float MAX_TURN = 0.05f;
-	const float MAX_MOVE = 5.0f;
-	const float MAX_FUEL = 3.5f;
 
 	//Animation
 
@@ -53,7 +53,7 @@ public:
 	Zeni::Collision::Sphere get_col_sphere() { return Zeni::Collision::Sphere(position, 10.0f); }
 	float get_fuel_percent() { return fuel / MAX_FUEL; }
 
-	bool locked() { return move_state == LOCK; }
+	bool locked() { return (move_state == LOCK); }
 
 	std::pair<Zeni::Vector3f, float> adjust_pitch(float amount);
 	std::pair<Zeni::Vector3f, float> adjust_yaw(float amount);
