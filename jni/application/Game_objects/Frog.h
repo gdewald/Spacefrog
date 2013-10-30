@@ -1,6 +1,7 @@
 #pragma once
 
 #include <zenilib.h>
+#include <utility>
 #include "Rendered_object.h"
 #include "Planet.h"
 
@@ -8,7 +9,7 @@
 // on the surface of a planet - LOCK
 // lifting off the surface - PREJUMP
 // in the air - JUMP
-enum MOVEMENT_STATE {LOCK, PREJUMP, JUMP};
+enum MOVEMENT_STATE {LOCK, PRELOCK, PREJUMP, JUMP};
 
 class Frog : public Rendered_object{
 private:
@@ -25,22 +26,25 @@ private:
 	const float MAX_MOVE = 5.0f;
 	const float MAX_FUEL = 3.5f;
 
+	//Animation
+
 public:
+	float keyframe_step;
 	Frog(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_),
-		                                                           velocity(Zeni::Vector3f()), Rendered_object("Frog"),
-																   move_state(JUMP), fuel(MAX_FUEL) { }
+		                                                           velocity(Zeni::Vector3f()), Rendered_object("Frog_jump"),
+																   move_state(JUMP), fuel(MAX_FUEL), keyframe_step(1.0f) { }
 
 	Frog(Planet*, Zeni::Vector3f axis = Zeni::Vector3f(1.0f, 0.0f, 0.0f), float angle = 0.0f);
 
 	//"Bumps" the colliding frog to surface
 	void move_to_lock();
 	//Makes the view "loop around"
-	void adjust_perspective();
+	std::pair<Zeni::Vector3f, float> adjust_perspective();
 
 	void update(float timestep);
 
-	void turn(float amount);
-	void move(float amount);
+	std::pair<Zeni::Vector3f, float> turn(float amount);
+	std::pair<Zeni::Vector3f, float> move(float amount);
 	void thrust(float amount);
 	void jump(float amount);
 
@@ -49,11 +53,18 @@ public:
 	Zeni::Collision::Sphere get_col_sphere() { return Zeni::Collision::Sphere(position, 10.0f); }
 	float get_fuel_percent() { return fuel / MAX_FUEL; }
 
-	void adjust_pitch(float amount);
-	void adjust_yaw(float amount);
+	bool locked() { return move_state == LOCK; }
+
+	std::pair<Zeni::Vector3f, float> adjust_pitch(float amount);
+	std::pair<Zeni::Vector3f, float> adjust_yaw(float amount);
 	void rotate(float amount);
 
 	void reset_camera(Zeni::Camera* c);
+	void reset_camera_pos(Zeni::Camera* c);
+	//Returns orientation meant for camera
+	//Zeni::Quaternion get_adj_orientation();
+
+	//Animation
 
 	void render();
 };

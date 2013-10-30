@@ -4,6 +4,10 @@
 using namespace Zeni;
 using namespace std;
 
+void Planet::update(float timestep) {
+	if (!orbit) return;
+}
+
 void Planet::render() {
 	Rendered_object::render(center, scale, Quaternion());
 

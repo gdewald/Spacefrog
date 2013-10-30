@@ -27,7 +27,7 @@ class Bootstrap {
       get_Fonts();
       get_Sounds();
 
-      return new Title_State<Play_state, Instructions_state>("Zenipex Library\nApplication");
+      return new Title_State<Play_state, Instructions_state>("SPACE\nFROG");
     }
   } m_goi;
 

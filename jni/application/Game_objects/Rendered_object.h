@@ -14,4 +14,7 @@ public:
 	virtual void render(Zeni::Point3f center, Zeni::Vector3f scale, Zeni::Quaternion rotation);
 
 	virtual void advance_keyframe(float timestep, float rate = 1.0f);
+	virtual void reset_keyframe(float keyframe = 0.0f) { model->set_keyframe(keyframe); }
+
+	virtual void swap_model(Zeni::String name);
 };

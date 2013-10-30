@@ -15,21 +15,20 @@ Game_model::Game_model() : controller(nullptr) {
 	//Vector3f forward = init_quaternion * Vector3f(1.0f, 0.0f, 0.0f);
 	//camera = new Camera(init_pos - (forward.normalized() * 30), init_quaternion);
 
-
 	//Checkpoint time
 	time_limit = 30;
 	timer = 0.0f;
 
-	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 30.0f, 80, "Planet_orange"));
+	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 25.0f, 80, "Planet_orange"));
 	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f, 60));
-	planets.push_back(new Planet(Point3f(300.0f, 300.0f, 500.0f), 20.0f));
+	planets.push_back(new Planet(Point3f(300.0f, 300.0f, 800.0f), 20.0f));
 
 	//Create a food instance
 	food = new Food(*planets.begin());
 	//Create a frog instance
 	frog = new Frog(planets[1]);
 	//Set up camera instance
-	camera = new Camera(frog->get_position(), frog->get_orientation());
+	camera = new Camera(frog->get_position(), frog->get_orientation(), 10.0f, 2000.0f);
 	frog->reset_camera(camera);
 }
 
@@ -67,6 +66,6 @@ void Game_model::update(float timestep) {
 	}
 
 	//Stop game if over limit
-	if (timer >= time_limit)
-		get_Game().pop_state();
+	//if (timer >= time_limit)
+		//get_Game().pop_state();
 }

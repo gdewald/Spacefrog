@@ -11,7 +11,8 @@ std::map<Zeni::String, Zeni::Model*> model_map;// = get_model_map();
 map<String, Model*> get_model_map() {
 	map<String, Model*> m;
 	
-	m["Frog"] = new Model("models/frog.3ds");
+	m["Frog_jump"] = new Model("models/dragonfly.3ds");//"models/frog.3ds");
+	m["Frog_lock"] = new Model("models/dragonfly.3ds");//"models/frog.3ds");
 	m["Planet_gray"] = new Model("models/planet_gray.3ds");
 	m["Dragonfly"] = new Model("models/dragonfly.3ds");
 	m["Planet_orange"] = new Model("models/planet_orange.3ds");
@@ -43,4 +44,10 @@ void Rendered_object::advance_keyframe(float timestep, float rate) {
 	k += timestep * rate;
 	if (k > k_max) k = k - k_max;
 	model->set_keyframe(k);
+}
+
+void Rendered_object::swap_model(String name) {
+	model = model_map[name];
+	//Set 0-th keyframe
+	model->set_keyframe(0.0f);
 }
