@@ -37,5 +37,7 @@ public:
 		Zeni::get_Video().set_clear_Color(Zeni::Color(0, 0, 1, 1));
 	};
 
+	void on_key(const SDL_KeyboardEvent &event);
+
 	void render();
 };

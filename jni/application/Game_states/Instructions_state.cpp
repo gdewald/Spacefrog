@@ -4,6 +4,12 @@ using namespace Zeni;
 
 Zeni::String Instructions_state::image_name = "goals";
 
+void Instructions_state::on_key(const SDL_KeyboardEvent &event) {
+	if (event.state == SDL_PRESSED && event.keysym.sym == SDLK_ESCAPE)
+		get_Game().pop_state();
+	else Widget_Gamestate::on_key(event);
+}
+
 void Instructions_state::render() {
 	Widget_Gamestate::render();
 
@@ -16,6 +22,6 @@ void Instructions_state::render() {
 	//	get_Colors()["title_text"],
 	//	ZENI_CENTER);
 
-	render_image(image_name, Point2f(100.0f, 50.0f), Point2f(612.0f, 562.0f));
+	//render_image(image_name, Point2f(100.0f, 50.0f), Point2f(612.0f, 562.0f));
 
 }

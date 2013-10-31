@@ -32,14 +32,85 @@ Play_state::Play_state() {
 	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONUP, SDL_CONTROLLER_BUTTON_RIGHTSHOULDER), 11);
 	//Right trigger
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_TRIGGERRIGHT), 12);
+	//End game
+	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_BACK), 13);
 }
+
+class Popup_pause_state_custom : public Popup_Pause_State {
+public:
+	class Continue_button : public Text_Button {
+	public:
+		Continue_button(Point2f ul, Point2f lr)
+			: Text_Button(ul, lr,
+			"system_36_800x600", "Continue")
+		{
+		}
+
+		void on_accept() { get_Game().pop_state(); }
+	};
+
+	class Quit_button : public Text_Button {
+	public:
+		Quit_button(Point2f ul, Point2f lr)
+			: Text_Button(ul, lr,
+			"system_36_800x600", "Quit")
+		{
+		}
+
+		void on_accept() { get_Game().pop_state(); get_Game().pop_state(); }
+	};
+
+	class Restart_button : public Text_Button {
+	public:
+		Restart_button(Point2f ul, Point2f lr)
+			: Text_Button(ul, lr,
+			"system_36_800x600", "Restart")
+		{
+		}
+
+		void on_accept() { get_Game().pop_state(); get_Game().pop_state(); get_Game().pop_state(); get_Game().push_state(new Play_state()); }
+	};
+
+	Continue_button* c;
+	Restart_button* r;
+	Quit_button* q;
+
+	Popup_pause_state_custom() : Popup_Pause_State() {
+		float ww = get_Window().get_width();
+		float wh = get_Window().get_height();
+		float left = ww/2 - ww / 8;
+		float right = ww/2 + ww / 8;
+		float upper = wh / 2 - wh / 16;
+		float lower = wh / 2 + wh / 16;
+
+		c = new Continue_button(Point2f(left, upper), Point2f(right, lower));
+		m_widgets.lend_Widget(*c);
+
+		upper += wh / 6;
+		lower += wh / 6;
+
+		r = new Restart_button(Point2f(left, upper), Point2f(right, lower));
+		m_widgets.lend_Widget(*r);
+
+		upper += wh / 6;
+		lower += wh / 6;
+
+		q = new Quit_button(Point2f(left, upper), Point2f(right, lower));
+		m_widgets.lend_Widget(*q);
+	}
+
+	void render() {
+		m_widgets.render();
+		Popup_Pause_State::render();
+	}
+};
 
 void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence, const int& action) {
 	switch (action) {
 	case 1: //Pause
 		if (confidence == 1.0f) {
 			Game &game = get_Game();
-			game.push_state(new Popup_Menu_State);
+			game.push_state(new Popup_pause_state_custom());
 		}
 		break;
 	case 2: //Frog turn
@@ -68,6 +139,8 @@ void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence
 		break;
 	case 12:
 		controller->rt(confidence);
+	case 13:
+		get_Game().pop_state();
 	}
 
 }

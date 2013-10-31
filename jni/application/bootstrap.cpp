@@ -16,6 +16,20 @@
 using namespace std;
 using namespace Zeni;
 
+class Title_state_custom : public Title_State<Play_state, Instructions_state> {
+public:
+	Title_state_custom(String title_) : Title_State(title_) {
+		Colors& cr = get_Colors();
+		//m_widgets.unlend_Widget(play_button);
+		//m_widgets.lend_Widget(play_button);
+	}
+
+	void render() {
+		
+		Title_State::render();
+	}
+};
+
 class Bootstrap {
   class Gamestate_One_Initializer : public Gamestate_Zero_Initializer {
     virtual Gamestate_Base * operator()() {
@@ -27,7 +41,7 @@ class Bootstrap {
       get_Fonts();
       get_Sounds();
 
-      return new Title_State<Play_state, Instructions_state>("SPACE\nFROG");
+      return new Title_state_custom("SPACE\nFROG");
     }
   } m_goi;
 

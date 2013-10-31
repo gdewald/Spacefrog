@@ -15,6 +15,14 @@ void Retry_button::on_accept() {
 	//Level_Select_State::push_current_level();
 }
 
+void Scoreboard_state::on_key(const SDL_KeyboardEvent &event) {
+	if (event.state == SDL_PRESSED && event.keysym.sym == SDLK_ESCAPE) {
+		save_score();
+		get_Game().pop_state();
+	}
+	else Widget_Gamestate::on_key(event);
+}
+
 void Scoreboard_state::render() {
 	Widget_Gamestate::render();
 	auto& p = Points::get_Points();

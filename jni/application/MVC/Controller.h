@@ -22,7 +22,6 @@ private:
 	float joy_lx;
 	float joy_ly;
 	float joy_rt;
-
 	
 public:
 	Controller();
