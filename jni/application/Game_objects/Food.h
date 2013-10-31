@@ -15,6 +15,9 @@ private:
 	bool attached;
 	Planet* p;
 
+	//Sound
+	Zeni::Sound_Source food_ss;
+
 public:
 
 	//Attached to position

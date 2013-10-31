@@ -27,9 +27,12 @@ private:
 	float fuel;
 
 	//Animation
+	float keyframe_step;
+
+	//Sound
+	Zeni::Sound_Source frog_ss;
 
 public:
-	float keyframe_step;
 	Frog(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_),
 		                                                           velocity(Zeni::Vector3f()), Rendered_object("Frog_jump"),
 																   move_state(JUMP), fuel(MAX_FUEL), keyframe_step(1.0f) { }
@@ -64,7 +67,8 @@ public:
 	//Returns orientation meant for camera
 	//Zeni::Quaternion get_adj_orientation();
 
-	//Animation
+	//Sound
+	void one_shot(Zeni::String name, float gain = 1.0f, float pitch = 1.0f);
 
 	void render();
 };

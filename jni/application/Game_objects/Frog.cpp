@@ -1,6 +1,8 @@
 #include "Frog.h"
 #include "../MVC/Game_model.h"
 #include "../Utility.h"
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 using namespace Zeni;
@@ -73,8 +75,6 @@ void Frog::update(float timestep) {
 		break;
 	case PREJUMP:
 
-		//Jump sound
-
 		//position += velocity * timestep;
 		//reset_camera(Game_model::get_model().get_camera());
 		move_state = JUMP;
@@ -118,6 +118,7 @@ void Frog::update(float timestep) {
 				reset_camera_pos(Game_model::get_model().get_camera());
 
 				//Landing sound
+				one_shot("frog_land");
 
 				move_state = PRELOCK;
 				return;
@@ -150,7 +151,14 @@ pair<Vector3f, float> Frog::move(float amount) {
 		//Start/continue jumping animation
 		if (keyframe_step >= 1.0f) {
 			keyframe_step = 0.0f;
-			//Ribbit sound
+			static int jumps = 0;
+			jumps++;
+			srand(time(NULL));
+			if (!(jumps % (6 + rand() % 8))) {
+				//Ribbit sound
+				if (!frog_ss.is_playing())
+					one_shot("frog_croak", 0.05f, 1.0f + 0.05f * (rand()%4 - 2));
+			}
 		}
 
 		Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
@@ -190,6 +198,9 @@ void Frog::jump(float amount) {
 	if (move_state != LOCK)
 		return;
 
+	//Jump sound
+	one_shot("frog_jump", 0.8f);
+
 	Vector3f left = orientation * Vector3f(0.0f, 1.0f, 0.0f);
 	orientation = Quaternion::Axis_Angle(left, -3.14f/8.0f) * orientation;
 	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
@@ -228,4 +239,14 @@ void Frog::reset_camera_pos(Zeni::Camera* c) {
 	Vector3f forward = orientation * Vector3f(1.0f, 0.0f, 0.0f);
 	Vector3f up = orientation * Vector3f(0.0f, 0.0f, 1.0f);
 	c->position = position - (forward.normalized() * 30.0f) + (up.normalized() * 20.0f);
+}
+
+//Sound
+void Frog::one_shot(String name, float gain, float pitch) {
+	frog_ss.stop();
+	frog_ss.set_buffer(get_Sounds()[name]);
+	frog_ss.set_position(position);
+	frog_ss.set_gain(gain);
+	frog_ss.set_pitch(pitch);
+	frog_ss.play();
 }

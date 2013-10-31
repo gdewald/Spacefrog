@@ -29,7 +29,9 @@ Game_model::Game_model() : controller(nullptr) {
 	//Create a frog instance
 	frog = new Frog(planets[1]);
 	//Set up camera instance
-	camera = new Camera(frog->get_position(), frog->get_orientation(), 10.0f, 2000.0f);
+	camera = new Camera();
+	camera->far_clip = 2000.0f;
+	frog->reset_camera(camera);
 }
 
 Controller* Game_model::get_controller() {
@@ -75,10 +77,14 @@ void Game_model::update(float timestep) {
 		food->set_planet(planets[i], axis, angle);
 
 		//Food sound
+		frog->one_shot("frog_eat", 0.25f);
 	}
 
 	//Stop game if out of time
 	if (timer <= 0.0f) {
 		get_Game().pop_state();
 	}
+
+	get_Sound().set_listener_forward_and_up(camera->get_forward(), camera->get_up());
+	get_Sound().set_listener_position(camera->position);
 }

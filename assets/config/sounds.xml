@@ -25,7 +25,19 @@ HOWTO:  To convert between types, or to downmix to mono,
         (4) Go to File->Export As Ogg Vorbis
 -->
 <Sounds>
-  <hello_world>
-    <filepath>sfx/104469__dkmedic__world</filepath>
-  </hello_world>
+  <frog_eat>
+    <filepath>sfx/frog_eat</filepath>
+  </frog_eat>
+  <frog_jump>
+    <filepath>sfx/frog_jump</filepath>
+  </frog_jump>
+  <frog_land>
+    <filepath>sfx/frog_land</filepath>
+  </frog_land>
+  <frog_croak>
+    <filepath>sfx/frog_croak</filepath>
+  </frog_croak>
+  <dragonfly_flutter>
+    <filepath>sfx/dragonfly_flutter</filepath>
+  </dragonfly_flutter>
 </Sounds>

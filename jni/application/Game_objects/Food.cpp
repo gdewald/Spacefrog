@@ -24,6 +24,14 @@ void Food::set_planet(Planet* p_, Vector3f axis, float angle) {
 	Point3f pos = p->get_position() + up.normalized() * (p->get_radius() + 5.0f);
 	set_position(pos);
 
+	food_ss.stop();
+	food_ss.set_position(position);
+	food_ss.set_looping(true);
+	food_ss.set_buffer(get_Sounds()["dragonfly_flutter"]);
+	food_ss.set_gain(1.0f);
+	food_ss.set_max_distance(200.0f);
+	food_ss.set_rolloff(1.0f);
+	food_ss.play();
 }
 
 void Food::render() {
