@@ -3,7 +3,7 @@
 #include "Controller.h"
 #include "../Points.h"
 
-#define DEBUG_ROT
+//#define DEBUG_ROT
 
 using namespace std;
 using namespace Zeni;
@@ -26,10 +26,10 @@ void Player_view::render_hud() {
 	//Fuel data
 	float bar_w = Game_model::get_model().get_frog()->get_fuel_percent() * ww/2;
 	float bar_h = wh / 16;
-	Vertex2f_Color v1(Point2f(ww / 2 - bar_w / 2, wh - wh / 16), cr["red"]);
-	Vertex2f_Color v2(Point2f(ww / 2 + bar_w / 2, wh - wh / 16), cr["green"]);
-	Vertex2f_Color v3(Point2f(ww / 2 + bar_w / 2, wh - wh / 16 + 30.0f), cr["green"]);
-	Vertex2f_Color v4(Point2f(ww / 2 - bar_w / 2, wh -  wh / 16 + 30.0f), cr["red"]);
+	Vertex2f_Color v1(Point2f(ww / 2 - ww/4, wh - wh / 16), cr["red"]);
+	Vertex2f_Color v2(Point2f(ww / 2 - ww/4 + bar_w, wh - wh / 16), cr["green"]);
+	Vertex2f_Color v3(Point2f(ww / 2 - ww/4 + bar_w, wh - wh / 16 + 30.0f), cr["green"]);
+	Vertex2f_Color v4(Point2f(ww / 2 - ww/4, wh -  wh / 16 + 30.0f), cr["red"]);
 	Quadrilateral<Vertex2f_Color> fuel_bar(v1, v2, v3, v4);
 
 	////Jump data

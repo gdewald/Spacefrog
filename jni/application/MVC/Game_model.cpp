@@ -58,7 +58,7 @@ void Game_model::update(float timestep) {
 	food->update(timestep);
 
 	//Reduce timer
-	timer -= timestep / 2;
+	timer -= timestep / 3;
 
 	if (frog->get_col_sphere().intersects(food->get_col_sphere())) {
 		//Update points

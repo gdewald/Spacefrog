@@ -20,7 +20,7 @@ Only TrueType fonts are supported.
 <Fonts>
   <timer>
     <filepath>fonts/airborne.ttf</filepath>
-    <height>48</height>
+    <height>68</height>
     <virtual_screen>
       <height>600</height>
     </virtual_screen>
