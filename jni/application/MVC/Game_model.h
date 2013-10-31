@@ -26,11 +26,17 @@ private:
 
 	static Game_model* instance;
 	Game_model();
+	~Game_model();
 public:
 	//Initialize new model
 	static void init_model() {
 		if (instance) delete instance;
 		instance = new Game_model();
+	}
+
+	static void dump_model() {
+		delete instance;
+		instance = nullptr;
 	}
 
 	//Singleton

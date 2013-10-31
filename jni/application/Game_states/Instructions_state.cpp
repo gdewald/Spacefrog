@@ -22,6 +22,6 @@ void Instructions_state::render() {
 	//	get_Colors()["title_text"],
 	//	ZENI_CENTER);
 
-	//render_image(image_name, Point2f(100.0f, 50.0f), Point2f(612.0f, 562.0f));
+	render_image(image_name, Point2f(0.0f, 120.0f), Point2f(1920.0f, 1080.0f));
 
 }

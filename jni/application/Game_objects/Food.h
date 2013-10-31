@@ -19,6 +19,7 @@ private:
 	Zeni::Sound_Source food_ss;
 
 public:
+	~Food() { stop_sound(); }
 
 	//Attached to position
 	Food(Zeni::Point3f position_, Zeni::Quaternion orientation_) : position(position_), orientation(orientation_), Rendered_object("Dragonfly") { }
@@ -35,4 +36,7 @@ public:
 	void update(float timestep);
 
 	void render();
+
+	//Stop sound
+	void stop_sound() { food_ss.stop(); }
 };

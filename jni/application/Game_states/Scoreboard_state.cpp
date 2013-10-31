@@ -24,6 +24,8 @@ void Scoreboard_state::on_key(const SDL_KeyboardEvent &event) {
 }
 
 void Scoreboard_state::render() {
+	render_image("skybox", Point2f(), Point2f(get_Window().get_size()));
+
 	Widget_Gamestate::render();
 	auto& p = Points::get_Points();
 	p.render_scores();

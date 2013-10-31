@@ -34,6 +34,13 @@ Game_model::Game_model() : controller(nullptr) {
 	frog->reset_camera(camera);
 }
 
+Game_model::~Game_model() {
+	delete food;
+	delete frog;
+	delete camera;
+	for_each(planets.begin(), planets.end(), [](Planet* p){ delete p; });
+}
+
 Controller* Game_model::get_controller() {
 	if (!controller) controller = new Controller();
 	return controller;

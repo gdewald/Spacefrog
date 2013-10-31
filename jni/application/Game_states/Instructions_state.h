@@ -9,7 +9,7 @@ class Instructions_state : public Zeni::Widget_Gamestate {
 	private:
 
 	public:
-		Goals_button() : Zeni::Text_Button(Zeni::Point2f(100.0f, 10.0f), Zeni::Point2f(300.0f, 50.0f), "system_36_800x600", "Goals") { }
+		Goals_button() : Zeni::Text_Button(Zeni::Point2f(1920.0/4.0-200.0, 20.0f), Zeni::Point2f(1920.0/4.0+200.0, 100.0f), "system_36_800x600", "Goals") { }
 
 		void on_hover() {
 			set_image("goals");
@@ -20,7 +20,7 @@ class Instructions_state : public Zeni::Widget_Gamestate {
 	private:
 
 	public:
-		Controls_button() : Zeni::Text_Button(Zeni::Point2f(500.0f, 10.0f), Zeni::Point2f(700.0f, 50.0f), "system_36_800x600", "Controls") { }
+		Controls_button() : Zeni::Text_Button(Zeni::Point2f(1920.0 / 2.0 + 1920/4 - 200.0, 20.0f), Zeni::Point2f(1920.0 / 2.0 + 1920/4 + 200.0, 100.0f), "system_36_800x600", "Controls") { }
 
 		void on_hover() {
 			set_image("controls");
@@ -46,10 +46,9 @@ class Instructions_state : public Zeni::Widget_Gamestate {
 
 public:
 	Instructions_state()
-		: Zeni::Widget_Gamestate(std::make_pair(Zeni::Point2f(0.0f, 0.0f), Zeni::Point2f(800.0f, 600.0f))), c(), g(), m() {
+		: Zeni::Widget_Gamestate(std::make_pair(Zeni::Point2f(0.0f, 0.0f), Zeni::Point2f(1920.0f, 1080.0f))), c(), g(), m() {
 			m_widgets.lend_Widget(c);
 			m_widgets.lend_Widget(g);
-			m_widgets.lend_Widget(m);
 	}
 	static void set_image(Zeni::String image_name_) { image_name = image_name_; }
 private:

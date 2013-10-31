@@ -25,7 +25,7 @@ public:
 	}
 
 	void render() {
-		
+		render_image("skybox", Point2f(), Point2f(get_Window().get_size()));
 		Title_State::render();
 	}
 };

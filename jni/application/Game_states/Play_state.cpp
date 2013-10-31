@@ -162,6 +162,7 @@ void Play_state::on_pop() {
 	get_Game().controller_mouse.enabled = true;
 
 	get_Game().push_state(new Scoreboard_state());
+	Game_model::dump_model();
 
 	//Stop the chronometer
 	m_chrono.stop();

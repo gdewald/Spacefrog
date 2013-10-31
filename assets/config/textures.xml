@@ -68,4 +68,12 @@ The following things are unsupported:
 	<filepath>textures/stars.png</filepath>
 	<tile>0</tile>
   </skybox>
+  <controls>
+	<filepath>textures/instructions/controls.png</filepath>
+	<tile>0</tile>
+  </controls>
+  <goals>
+	<filepath>textures/instructions/goals.png</filepath>
+	<tile>0</tile>
+  </goals>
 </Textures>
