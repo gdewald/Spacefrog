@@ -44,7 +44,7 @@
 <Zenilib>
     <Uniqname>zenilib</Uniqname>
     <Textures>
-        <Anisotropy>0</Anisotropy>
+        <Anisotropy>14</Anisotropy>
         <Bilinear_Filtering>1</Bilinear_Filtering>
         <Mipmapping>1</Mipmapping>
     </Textures>
@@ -56,8 +56,8 @@
         <Full_Screen>0</Full_Screen>
         <Multisampling>0</Multisampling>
         <Resolution>
-            <Width>1600</Width>
-            <Height>1200</Height>
+            <Width>1280</Width>
+            <Height>1024</Height>
         </Resolution>
         <Vertical_Sync>1</Vertical_Sync>
     </Video>

@@ -11,8 +11,8 @@ std::map<Zeni::String, Zeni::Model*> model_map;// = get_model_map();
 map<String, Model*> get_model_map() {
 	map<String, Model*> m;
 	
-	m["Frog_jump"] = new Model("models/dragonfly.3ds");//"models/frog.3ds");
-	m["Frog_lock"] = new Model("models/dragonfly.3ds");//"models/frog.3ds");
+	m["Frog_jump"] = new Model("models/frog_jump.3ds");//"models/frog.3ds");
+	m["Frog_lock"] = new Model("models/frog_move.3ds");//"models/frog.3ds");
 	m["Planet_gray"] = new Model("models/planet_gray.3ds");
 	m["Dragonfly"] = new Model("models/dragonfly.3ds");
 	m["Planet_orange"] = new Model("models/planet_orange.3ds");
