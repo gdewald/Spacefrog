@@ -24,6 +24,12 @@ void Food::set_planet(Planet* p_, Vector3f axis, float angle) {
 	Point3f pos = p->get_position() + up.normalized() * (p->get_radius() + 5.0f);
 	set_position(pos);
 
+	//Light
+	Vector3f down = orientation_in * Vector3f(0.0f, 0.0f, -1.0f);
+	food_l = Light(Color(.3, .2, .2, .7), Color(.3, .2, .2, .7), Color(.3, .2, .2, .7), pos, down);
+	food_l.light_type = LIGHT_DIRECTIONAL;
+
+	//Sounds
 	food_ss.stop();
 	food_ss.set_position(position);
 	food_ss.set_looping(true);
@@ -35,6 +41,7 @@ void Food::set_planet(Planet* p_, Vector3f axis, float angle) {
 }
 
 void Food::render() {
+	get_Video().set_Light(0, food_l);
 	Rendered_object::render(position, Vector3f(.2, .2, .2), orientation);
 }
 

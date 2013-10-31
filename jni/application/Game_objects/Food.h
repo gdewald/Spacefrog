@@ -18,6 +18,9 @@ private:
 	//Sound
 	Zeni::Sound_Source food_ss;
 
+	//Light
+	Zeni::Light food_l;
+
 public:
 	~Food() { stop_sound(); }
 

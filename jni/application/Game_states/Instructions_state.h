@@ -49,6 +49,8 @@ public:
 		: Zeni::Widget_Gamestate(std::make_pair(Zeni::Point2f(0.0f, 0.0f), Zeni::Point2f(1920.0f, 1080.0f))), c(), g(), m() {
 			m_widgets.lend_Widget(c);
 			m_widgets.lend_Widget(g);
+			render_image("skybox", Zeni::Point2f(), Zeni::Point2f(Zeni::get_Window().get_size()));
+
 	}
 	static void set_image(Zeni::String image_name_) { image_name = image_name_; }
 private:

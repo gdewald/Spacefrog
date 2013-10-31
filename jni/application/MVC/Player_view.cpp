@@ -76,9 +76,12 @@ void Player_view::render() {
 	//Game_model::get_model().get_frog_position();
 	get_Video().set_3d(*camera);
 	get_Video().set_zwrite(true);
+	get_Video().set_lighting(true);
+	get_Video().set_ambient_lighting(Color(1.0f, .6f, .6f, .6f));
 	//Game_model::get_model().get_frog()->render();
 	auto renderables = Game_model::get_model().get_rendered();
 	for_each(renderables.begin(), renderables.end(), [](Rendered_object* r){ r->render(); });
+	get_Video().set_lighting(false);
 
 	//Render 2d timer
 	render_hud();
