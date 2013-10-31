@@ -70,8 +70,6 @@ void Frog::update(float timestep) {
 		if (fuel > MAX_FUEL)
 			fuel = MAX_FUEL;
 
-
-
 		break;
 	case PREJUMP:
 

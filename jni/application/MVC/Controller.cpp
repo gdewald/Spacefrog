@@ -26,12 +26,12 @@ void Controller::apply_actions(float timestep) {
 		camera->adjust_pitch(joy_ry * 0.5f * timestep);
 	}
 	//Frog movement
-	if (abs(joy_lx) > 0.1f) {
+	if (!b_hold && abs(joy_lx) > 0.1f) {
 		auto rot = frog->turn(joy_lx * timestep * -2.0f);
 		match_cam_pos = true;
 		camera->orientation = Quaternion::Axis_Angle(rot.first, rot.second/*frog_up, joy_lx * timestep * -2.0f*/) * camera->orientation;
 	}
-	if (abs(joy_ly) > 0.1f) {
+	if (!b_hold && abs(joy_ly) > 0.1f) {
 		if (frog->locked()) {
 			auto rot = frog->move(joy_ly * timestep * 5.0f);
 			slerp = true;

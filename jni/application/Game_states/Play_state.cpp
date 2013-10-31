@@ -1,5 +1,7 @@
 #include "Play_state.h"
 #include "../MVC/Game_model.h"
+#include "Scoreboard_state.h"
+#include "../Points.h"
 
 using namespace Zeni;
 using namespace std;
@@ -75,6 +77,8 @@ void Play_state::on_push() {
 	get_Window().set_mouse_state(Window::MOUSE_GRABBED_AND_HIDDEN);
 	get_Game().controller_mouse.enabled = false;
 
+	Points::get_Points().reset();
+
 	//Start the chronometer
 	m_chrono.start();
 }
@@ -83,6 +87,8 @@ void Play_state::on_pop() {
 	//Ungrab the mouse and controller
 	get_Window().set_mouse_state(Window::MOUSE_NORMAL);
 	get_Game().controller_mouse.enabled = true;
+
+	get_Game().push_state(new Scoreboard_state());
 
 	//Stop the chronometer
 	m_chrono.stop();

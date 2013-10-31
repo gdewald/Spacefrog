@@ -1,6 +1,7 @@
 #include "Player_view.h"
 #include "Game_model.h"
 #include "Controller.h"
+#include "../Points.h"
 
 #define DEBUG_ROT
 
@@ -51,6 +52,8 @@ void Player_view::render_hud() {
 
 	get_Video().render(fuel_bar);
 	//get_Video().render(jump_bar);
+
+	Points::get_Points().render(Point2f(0.0f, 0.0f), Point2f(ww, wh));
 
 #ifdef DEBUG_ROT
 	//Debugging

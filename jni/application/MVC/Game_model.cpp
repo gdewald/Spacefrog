@@ -1,5 +1,6 @@
 #include "Game_model.h"
 #include "Controller.h"
+#include "../Points.h"
 #include <cstdlib>
 #include <ctime>
 
@@ -57,9 +58,11 @@ void Game_model::update(float timestep) {
 	food->update(timestep);
 
 	//Reduce timer
-	timer -= timestep / 4;
+	timer -= timestep / 2;
 
 	if (frog->get_col_sphere().intersects(food->get_col_sphere())) {
+		//Update points
+		Points::get_Points().hit();
 		// Add the time limit if food picked up
 		timer += time_limit;
 		if (time_limit > 5)
@@ -75,6 +78,7 @@ void Game_model::update(float timestep) {
 	}
 
 	//Stop game if out of time
-	if (timer <= 0.0f)
+	if (timer <= 0.0f) {
 		get_Game().pop_state();
+	}
 }
