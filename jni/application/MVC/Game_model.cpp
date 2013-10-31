@@ -23,6 +23,7 @@ Game_model::Game_model() : controller(nullptr) {
 	planets.push_back(new Planet(Point3f(300.0f, 150.0f, 150.0f), 25.0f, 80, "Planet_orange"));
 	planets.push_back(new Planet(Point3f(-300.0f, -150.0f, -150.0f), 20.0f, 60));
 	planets.push_back(new Planet(Point3f(300.0f, 300.0f, 800.0f), 20.0f));
+	planets.push_back(new Planet(Point3f(1000.0f, 300.0f, 150.0f), 15.0f, 50));
 
 	//Create a food instance
 	food = new Food(*planets.begin());
@@ -80,7 +81,11 @@ void Game_model::update(float timestep) {
 		Vector3f axis;
 		float angle;
 		make_random_axis_angle(axis, angle);
+		srand(time(NULL));
 		int i = rand() % planets.size();
+		static int prev = 0;
+		if(i == prev) i = i % planets.size();
+		prev = i;
 		food->set_planet(planets[i], axis, angle);
 
 		//Food sound
