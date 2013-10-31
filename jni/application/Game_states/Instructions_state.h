@@ -55,5 +55,8 @@ public:
 	static void set_image(Zeni::String image_name_) { image_name = image_name_; }
 private:
 	static Zeni::String image_name;
+
+	void on_key(const SDL_KeyboardEvent &event);
+	
 	void render();
 };
