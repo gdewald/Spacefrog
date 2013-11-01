@@ -35,7 +35,7 @@ void Food::set_planet(Planet* p_, Vector3f axis, float angle) {
 	food_ss.set_looping(true);
 	food_ss.set_buffer(get_Sounds()["dragonfly_flutter"]);
 	food_ss.set_gain(1.0f);
-	food_ss.set_max_distance(200.0f);
+	food_ss.set_max_distance(500.0f);
 	food_ss.set_rolloff(1.0f);
 	food_ss.play();
 }
