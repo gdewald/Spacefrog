@@ -60,6 +60,12 @@ void make_random_axis_angle(Vector3f& axis, float& angle) {
 }
 
 void Game_model::update(float timestep) {
+	//Stop game if out of time
+	if (timer <= 0.0f) {
+		get_Game().pop_state();
+		return;
+	}
+
 	//frog->reset_camera(camera);
 	//frog->reset_camera_pos(camera);
 	//frog->rotate(5.0 * timestep);
@@ -90,11 +96,6 @@ void Game_model::update(float timestep) {
 
 		//Food sound
 		frog->one_shot("frog_eat", 0.25f);
-	}
-
-	//Stop game if out of time
-	if (timer <= 0.0f) {
-		get_Game().pop_state();
 	}
 
 	get_Sound().set_listener_forward_and_up(camera->get_forward(), camera->get_up());

@@ -6,7 +6,10 @@
 using namespace std;
 using namespace Zeni;
 
-Controller::Controller() : rs(false), ls(false), b_hold(false), b_time(0.0f), b_release(false), jump(false) {
+Controller::Controller() : rs(false), ls(false), b_hold(false), b_time(0.0f), 
+                           b_release(false), jump(false), 
+						   joy_rx(0), joy_ry(0), joy_lx(0), joy_ly(0),
+						   joy_rt(0) {
 	camera = Game_model::get_model().get_camera();
 	frog = Game_model::get_model().get_frog();
 }

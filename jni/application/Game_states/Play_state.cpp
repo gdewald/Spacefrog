@@ -34,6 +34,8 @@ Play_state::Play_state() {
 	set_action(Zeni_Input_ID(SDL_CONTROLLERAXISMOTION, SDL_CONTROLLER_AXIS_TRIGGERRIGHT), 12);
 	//End game
 	set_action(Zeni_Input_ID(SDL_CONTROLLERBUTTONDOWN, SDL_CONTROLLER_BUTTON_BACK), 13);
+
+	//Map keyboard keys
 }
 
 class Popup_pause_state_custom : public Popup_Pause_State {
@@ -104,6 +106,35 @@ public:
 		Popup_Pause_State::render();
 	}
 };
+
+void Play_state::on_event(const SDL_Event& event) {
+	if (event.type == SDL_MOUSEMOTION) {
+
+	}
+	else if (event.type == SDL_KEYDOWN || event.type == SDL_KEYUP) {
+		float conf = 1.0f;
+		switch (event.key.keysym.sym) {
+		case SDLK_w:
+			conf = -1.0f;
+		case SDLK_s:
+			if (event.type == SDL_KEYUP) conf = 0.0f;
+			controller->lefty(conf);
+			return;
+		case SDLK_a:
+			conf = -1.0f;
+		case SDLK_d:
+			if (event.type == SDL_KEYUP) conf = 0.0f;
+			controller->leftx(conf);
+			return;
+		case SDLK_SPACE:
+			controller->b_state(event.type == SDL_KEYDOWN);
+			return;
+		default:
+			break;
+		}
+	}
+	Gamestate_II::on_event(event);
+}
 
 void Play_state::on_event(const Zeni::Zeni_Input_ID& id, const float& confidence, const int& action) {
 	switch (action) {
