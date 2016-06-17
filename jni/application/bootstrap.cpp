@@ -5,8 +5,8 @@
  */
 
 #include <zenilib.h>
-#include "Game_states\Play_state.h"
-#include "Game_states\Instructions_state.h"
+#include "Game_states/Play_state.h"
+#include "Game_states/Instructions_state.h"
 
 #if defined(_DEBUG) && defined(_WINDOWS)
 #define DEBUG_NEW new(_NORMAL_BLOCK, __FILE__, __LINE__)

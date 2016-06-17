@@ -2,10 +2,10 @@
 
 #include <zenilib.h>
 #include <vector>
-#include "..\Game_objects\Planet.h"
-#include "..\Game_objects\Rendered_object.h"
-#include "..\Game_objects\Frog.h"
-#include "..\Game_objects\Food.h"
+#include "../Game_objects/Planet.h"
+#include "../Game_objects/Rendered_object.h"
+#include "../Game_objects/Frog.h"
+#include "../Game_objects/Food.h"
 
 class Controller;
 

@@ -154,7 +154,7 @@ solution "zenilib"
 
     local ver=os.getversion()
     if _OPTIONS.macosx ~= "10.6" and (_OPTIONS.macosx ~= "native" or ver.majorversion ~= 10 or ver.minorversion ~= 6) then
-      buildoptions { "-stdlib=libc++" }
+      buildoptions { "-std=c++11 -stdlib=libc++" }
       linkoptions { "-stdlib=libc++" }
     end
 
